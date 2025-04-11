@@ -47,7 +47,7 @@ end
 function ammoManager.draw()
     love.graphics.print(a.ammoInMag.." / "..a.ammoInPocket, 950, 100, 0, 3, 3)
     if a.isReloading then
-        love.graphics.print("RELOAD !", 950, 120, 0, 3, 3)
+        love.graphics.print("RELOAD !", 950, 140, 0, 3, 3)
     end
     if a.isEmpty then
         love.graphics.print("EMPTY !", 950, 140, 0, 3, 3)
