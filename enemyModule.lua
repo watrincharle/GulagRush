@@ -14,6 +14,7 @@ function enemyModule.load()
     e.timerLoading = 1.5
     e.STATE = "isSearching"
     e.radius = 300
+    e.hitbox = 32
     e.width = e.sprite:getWidth()
     e.height = e.sprite:getHeight()
 

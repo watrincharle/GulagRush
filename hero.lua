@@ -41,6 +41,7 @@ function hero.load()
     hero.rotation = 0
     hero.speed = 3
     hero.radius = 32
+    hero.hitbox = hero.radius
 end
 
 
