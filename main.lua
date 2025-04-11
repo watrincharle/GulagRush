@@ -4,8 +4,8 @@ local enemyModule = require("enemyModule")
 local shoot = require("shoot")
 colision = require("collision")
 
-local ennemies = {}
-local bullets = {}
+ennemies = {}
+bullets = {}
 
 
 function love.load()
@@ -20,6 +20,8 @@ function love.load()
     print("map loaded .")
     hero.load()
     print("hero loaded .")
+    screenWidth = love.graphics.getWidth()
+    screenHeight = love.graphics.getHeight()
 end
 
 function love.update(dt)
@@ -30,12 +32,23 @@ function love.update(dt)
         for _, e in ipairs(ennemies) do
             e:update(dt)  
         end
+        for i = #ennemies, 1, -1 do
+            if ennemies[i].isFree == true then
+                table.remove(ennemies, i)
+            end
+        end
     end
     if #bullets > 0 then
         for _, s in ipairs(bullets) do
             s:update(dt) 
         end
+        for i = #bullets, 1, -1 do
+            if bullets[i].isFree == true then
+                table.remove(bullets, i)
+            end
+        end
     end
+    
 end
 
 function love.draw()

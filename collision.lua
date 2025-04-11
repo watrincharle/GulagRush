@@ -28,3 +28,9 @@ function checkShootCollision(a, b)
     local distance = math.sqrt(dx * dx + dy * dy)
     return distance < (a.hitbox + b.hitbox)
 end
+
+function bulletOutOfRange(a)
+    if a.x >= screenWidth or a.x <= 0 or a.y >= screenHeight or a.y <= 0 then
+        return true
+    end
+end

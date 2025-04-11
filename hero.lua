@@ -41,6 +41,7 @@ function hero.load()
     hero.rotation = 0
     hero.speed = 3
     hero.radius = 32
+    hero.life = 5
     hero.hitbox = hero.radius
 end
 
@@ -54,6 +55,7 @@ end
 
 function hero:draw()
     love.graphics.draw(hero.sprite, hero.x, hero.y, hero.rotation, .5 ,.5 , hero.width/2, hero.height/2)
+    love.graphics.print(hero.life, 100, 100)
 end
 
 

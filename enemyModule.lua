@@ -11,12 +11,13 @@ function enemyModule.load()
     e.rotation = math.random(0, 2 * math.pi)
     e.dx = nil
     e.timerSearching = math.random(0.5, 2)
-    e.timerLoading = 1.5
+    e.timerLoading = 1
     e.STATE = "isSearching"
     e.radius = 300
     e.hitbox = 32
     e.width = e.sprite:getWidth()
     e.height = e.sprite:getHeight()
+    e.isFree = false
 
     function e:update(dt)
         if e.STATE == "isSearching" then
@@ -31,6 +32,9 @@ function enemyModule.load()
             e:shoot(dt)
         end
         e:stayAtTheRightPosition()
+        if e.life <= 0 then
+            e.isFree = true
+        end
     end
 
 
@@ -116,8 +120,9 @@ function enemyModule.load()
         e.rotation = math.atan2(hero.y - e.y, hero.x - e.x)
         e.timerLoading = e.timerLoading - dt
         if e.timerLoading <= 0 then
-            --shoot:bullets(e)
-            e.timerLoading = 1.5
+            local newShoot = shoot.load(e, "ennemy")
+            table.insert(bullets, newShoot)
+            e.timerLoading = 1
         end
         if not checkCircleCollision(e, hero, "chaseTarget") then
             e.STATE = "chaseTarget"
