@@ -1,6 +1,5 @@
 enemyModule = {}
 
--- Fonction pour créer un nouvel ennemi
 function enemyModule.load()
     local e = {}
     e.x = 200
@@ -116,7 +115,7 @@ function enemyModule.load()
         e.rotation = math.atan2(hero.y - e.y, hero.x - e.x)
         e.timerLoading = e.timerLoading - dt
         if e.timerLoading <= 0 then
-            shoot:bullets(e)
+            --shoot:bullets(e)
             e.timerLoading = 1.5
         end
         if not checkCircleCollision(e, hero, "chaseTarget") then

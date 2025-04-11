@@ -30,7 +30,7 @@ hero.moove = function()
     map.posY = map.posY + dY * hero.speed
 end
 
-hero.loadTable = function()
+function hero.load()
     hero.sprite = love.graphics.newImage("sprites/hero.png")
     hero.x = love.graphics.getWidth()/2 - 32
     hero.y = love.graphics.getHeight()/2 - 32
@@ -38,14 +38,11 @@ hero.loadTable = function()
     hero.sizeY = 32
     hero.width = hero.sprite:getWidth()
     hero.height = hero.sprite:getHeight()
-    hero.rotation = nil
+    hero.rotation = 0
     hero.speed = 3
     hero.radius = 32
 end
 
-function hero:load()
-    hero.loadTable()
-end
 
 function hero:update()
     hero.rotation = math.atan2(mY - hero.y, mX - hero.x)
