@@ -5,6 +5,7 @@ local shoot = require("shoot")
 colision = require("collision")
 
 local ennemies = {}
+local bullets = {}
 
 
 function love.load()
@@ -13,7 +14,6 @@ function love.load()
     love.window.setMode(1280, 720)
     map.load()
     hero.load()
-    shoot.load()
 end
 
 function love.update(dt)
@@ -26,6 +26,11 @@ function love.update(dt)
             e:update(dt)  -- Appel de la méthode update de l'ennemi
         end
     end
+    if #bullets > 0 then
+        for _, s in ipairs(bullets) do
+            s:update(dt)  -- Appel de la méthode update de l'ennemi
+        end
+    end
 end
 
 function love.draw()
@@ -36,15 +41,16 @@ function love.draw()
             e:draw()  -- Appel de la méthode draw de l'ennemi
         end
     end
-    shoot.draw()
+    if #bullets > 0 then
+        for _, s in ipairs(bullets) do
+            s:draw()  -- Appel de la méthode draw de l'ennemi
+        end
+    end
 end
 
 function love.mousepressed(x, y, button)
     if button == 1 then
-        if not shoot.outOfAmmo and not shoot.reload then
-            shoot:bullets(hero)
-            shoot.usingAmmo()
-        end    
+        shoot.load(hero, "hero")
     end
 end
 
