@@ -12,11 +12,30 @@ function shoot.load(pShooter, pIndex)
         s.width = s.sprite:getWidth()
         s.height = s.sprite:getHeight()
         s.hitbox = 8
+        s.isFree = false
     
 
     function s:update(dt)
         s.x = s.x + s.speed * dt * math.cos(s.rotation)
         s.y = s.y + s.speed * dt * math.sin(s.rotation)
+        if pIndex == "hero" then
+            if #ennemies > 0 then
+                for _, e in ipairs(ennemies) do
+                    if checkShootCollision(e, s) then
+                        e.life = e.life - 1
+                        s.isFree = true
+                    end
+                end
+            end
+        elseif pIndex == "ennemy" then
+            if checkShootCollision(hero, s) then
+                hero.life = hero.life - 1
+                s.isFree = true
+            end
+        end
+        if bulletOutOfRange(s) then
+            s.isFree = true
+        end
     end
 
     function s:draw()
