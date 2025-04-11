@@ -3,6 +3,7 @@ local hero = require("hero")
 local enemyModule = require("enemyModule")
 local shoot = require("shoot")
 colision = require("collision")
+local ammoManager = require("ammoManager")
 
 ennemies = {}
 bullets = {}
@@ -20,6 +21,7 @@ function love.load()
     print("map loaded .")
     hero.load()
     print("hero loaded .")
+    ammoManager.load()
     screenWidth = love.graphics.getWidth()
     screenHeight = love.graphics.getHeight()
 end
@@ -48,6 +50,7 @@ function love.update(dt)
             end
         end
     end
+    ammoManager.update(dt)
     
 end
 
@@ -64,12 +67,12 @@ function love.draw()
             s:draw() 
         end
     end
+    ammoManager.draw()
 end
 
 function love.mousepressed(x, y, button)
-    if button == 1 then
-        local newShoot = shoot.load(hero, "hero")
-        table.insert(bullets, newShoot)
+    if button == 1 and not a.isReloading and not a.isEmpty then
+        ammoManager.fire()
     end
 end
 
@@ -79,9 +82,8 @@ function love.keypressed(key)
         table.insert(ennemies, newEnemy) 
     end
 
-    if key == "r" and shoot.mag >= 1 and shoot.ammo >= 1 and not shoot.volountaryReload and shoot.mag < 30 then
-        shoot.volountaryReload = true
-        shoot.usingAmmo()
+    if key == "r" and not a.isReloading and not a.isEmpty and a.ammoInMag <= 29 then
+        a.isReloading = true
     end
 
     if key == "f" and love.window.setMode(1280, 720, {fullscreen = true, fullscreentype = "exclusive"}) then
