@@ -43,7 +43,7 @@ hero.loadTable = function()
     hero.radius = 32
 end
 
-function hero:load()
+function hero.load()
     hero.loadTable()
 end
 
