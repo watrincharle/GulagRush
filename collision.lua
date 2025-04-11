@@ -21,3 +21,10 @@ function checkCircleCollision(a, b, c)
         return distance < (a.radius * .33 + b.radius)
     end
 end
+
+function checkShootCollision(a, b)
+    local dx = a.x - b.x
+    local dy = a.y - b.y
+    local distance = math.sqrt(dx * dx + dy * dy)
+    return distance < (a.hitbox + b.hitbox)
+end
