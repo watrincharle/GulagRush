@@ -9,9 +9,14 @@ local pause = require("scenes/pause")
 local gameOver = require("scenes/gameOver")
 local game = require("scenes/game")
 local init = require("init")
+local droppedBullets = require("droppedBullets")
+local droppedHealth = require("droppedHealth")
 
 ennemies = {}
 bullets = {}
+bulletDrop = {}
+healthDrop = {}
+
 Screen_Mode = "menu"
 
 

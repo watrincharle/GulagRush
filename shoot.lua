@@ -21,14 +21,14 @@ function shoot.load(pShooter, pIndex)
         if pIndex == "hero" then
             if #ennemies > 0 then
                 for _, e in ipairs(ennemies) do
-                    if checkShootCollision(e, s) then
+                    if checkCollision(e, s) then
                         e.life = e.life - 1
                         s.isFree = true
                     end
                 end
             end
         elseif pIndex == "ennemy" then
-            if checkShootCollision(hero, s) then
+            if checkCollision(hero, s) then
                 
                 if not hero.isInvincible then
                     hero.life = hero.life - 1
@@ -40,6 +40,33 @@ function shoot.load(pShooter, pIndex)
         if bulletOutOfRange(s) then
             s.isFree = true
         end
+        s:stayAtTheRightPosition()
+    end
+
+    function s:stayAtTheRightPosition()
+        if not love.keyboard.isDown("z") or not love.keyboard.isDown("q") or not love.keyboard.isDown("s") or not love.keyboard.isDown("d") then
+            local dX = 0
+            local dY = 0
+        end
+        if love.keyboard.isDown("z") and map.posY <= hero.y then
+            dY = dY + 1
+        end
+        if love.keyboard.isDown("s") and hero.y + 32 <= (map.posY + map.height) then
+            dY = dY - 1
+        end
+        if love.keyboard.isDown("q") and map.posX <= hero.x then
+            dX = dX + 1
+        end
+        if love.keyboard.isDown("d") and hero.x + 32 <= (map.posX + map.width) then
+            dX = dX - 1
+        end
+        local magnitude = math.sqrt(dX * dX + dY * dY)
+        if magnitude > 0 then
+            dX = dX / magnitude
+            dY = dY / magnitude
+        end
+        s.x = s.x + dX * hero.speed
+        s.y = s.y + dY * hero.speed
     end
 
     function s:draw()

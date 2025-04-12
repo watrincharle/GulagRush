@@ -35,6 +35,10 @@ function enemyModule.load()
         if e.life <= 0 then
             e.isFree = true
         end
+        if e.isFree then
+            table.insert(bulletDrop, droppedBullets.load(e.x, e.y))
+            table.insert(healthDrop, droppedHealth.load(e.x, e.y))
+        end 
     end
 
 
@@ -67,8 +71,8 @@ function enemyModule.load()
 
     function e:stayAtTheRightPosition()
         if not love.keyboard.isDown("z") or not love.keyboard.isDown("q") or not love.keyboard.isDown("s") or not love.keyboard.isDown("d") then
-            dX = 0
-            dY = 0
+            local dX = 0
+            local dY = 0
         end
         if love.keyboard.isDown("z") and map.posY <= hero.y then
             dY = dY + 1

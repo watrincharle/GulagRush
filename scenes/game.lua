@@ -24,23 +24,54 @@ function game:update(dt)
                 end
             end
         end
+        if #bulletDrop > 0 then
+            for _, db in ipairs(bulletDrop) do
+                db:update(dt)
+            end
+            for i = #bulletDrop, 1, -1 do
+                if bulletDrop[i].isFree == true then
+                    table.remove(bulletDrop, i)
+                end
+            end
+        end
+        if #healthDrop > 0 then
+            for _, dh in ipairs(healthDrop) do
+                dh:update(dt)
+            end
+            for i = #healthDrop, 1, -1 do
+                if healthDrop[i].isFree == true then
+                    table.remove(healthDrop, i)
+                end
+            end
+        end
         ammoManager.update(dt)
 end
 
 function game.draw()
     map.draw()
-    hero.draw()
-    if #ennemies > 0 then
-        for _, e in ipairs(ennemies) do
-            e:draw()
-        end
-    end
+
     if #bullets > 0 then
         for _, s in ipairs(bullets) do
             s:draw() 
         end
     end
     ammoManager.draw()
+    if #bulletDrop > 0 then
+        for _, db in ipairs(bulletDrop) do
+            db:draw()
+        end
+    end
+    if #healthDrop > 0 then
+        for _, dh in ipairs(healthDrop) do
+            dh:draw()
+        end
+    end
+    hero.draw()
+    if #ennemies > 0 then
+        for _, e in ipairs(ennemies) do
+            e:draw()
+        end
+    end
 end
 
 return game
