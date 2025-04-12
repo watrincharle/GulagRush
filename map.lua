@@ -33,4 +33,9 @@ function map:draw()
 
 end
 
+function map.init()
+    map.posX = love.graphics.getWidth()/2 - map.width/2 
+    map.posY = love.graphics.getHeight()/2 - map.height/2
+end 
+
 return map

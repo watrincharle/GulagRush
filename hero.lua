@@ -45,6 +45,7 @@ function hero.load()
     hero.hitbox = hero.radius
     hero.invinsibilityTimer = 1.2
     hero.isInvincible = false
+    hero.isAlive = true
 end
 
 
@@ -53,6 +54,9 @@ function hero:update(dt)
     hero.moove()
     if hero.isInvincible then
         hero:invisibilityFrame(dt)
+    end
+    if hero.life <= 0 then
+        hero.isAlive = false
     end
 end
 
@@ -83,6 +87,7 @@ function hero.init()
     hero.hitbox = hero.radius
     hero.invinsibilityTimer = 1.2
     hero.isInvincible = false
+    hero.isAlive = true
 end
 
 
