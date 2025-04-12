@@ -74,6 +74,16 @@ function hero:draw()
     love.graphics.print(hero.life, 100, 100, 0, 3, 3)
 end
 
+function hero.init()
+    hero.x = love.graphics.getWidth()/2 - 32
+    hero.y = love.graphics.getHeight()/2 - 32
+    hero.rotation = 0
+    hero.radius = 32
+    hero.life = 5
+    hero.hitbox = hero.radius
+    hero.invinsibilityTimer = 1.2
+    hero.isInvincible = false
+end
 
 
 return hero
