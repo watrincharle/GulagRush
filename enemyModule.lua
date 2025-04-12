@@ -37,7 +37,7 @@ function enemyModule.load()
         end
         if e.isFree then
             table.insert(bulletDrop, droppedBullets.load(e.x, e.y))
-            print(#bulletDrop)
+            table.insert(healthDrop, droppedHealth.load(e.x, e.y))
         end 
     end
 
