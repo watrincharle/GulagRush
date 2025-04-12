@@ -6,7 +6,6 @@ function droppedHealth.load(pEx, pEy)
     dh.x = pEx - 10
     dh.y = pEy + 10
     dh.hitbox = 16
-    dh.value = math.random(3, 9)
     dh.isFree = false
 
     function dh:update(dt)
