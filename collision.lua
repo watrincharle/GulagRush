@@ -8,17 +8,17 @@ function checkCircleCollision(a, b, c)
         local dx = a.x - b.x
         local dy = a.y - b.y
         local distance = math.sqrt(dx * dx + dy * dy)
-        return distance < (a.radius * .5 + b.radius)
+        return distance < (a.radius * .75 + b.radius)
     elseif c == "getBack" then
         local dx = a.x - b.x
         local dy = a.y - b.y
         local distance = math.sqrt(dx * dx + dy * dy)
-        return distance < (a.radius * .25 + b.radius)
+        return distance < (a.radius * .4 + b.radius)
     elseif c == "shoot" then
         local dx = a.x - b.x
         local dy = a.y - b.y
         local distance = math.sqrt(dx * dx + dy * dy)
-        return distance < (a.radius * .33 + b.radius)
+        return distance < (a.radius * .5 + b.radius)
     end
 end
 

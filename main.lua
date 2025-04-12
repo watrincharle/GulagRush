@@ -29,7 +29,7 @@ end
 function love.update(dt)
     mX, mY = love.mouse.getPosition()
     map.update()
-    hero.update()
+    hero:update(dt)
     if #ennemies > 0 then
         for _, e in ipairs(ennemies) do
             e:update(dt)  

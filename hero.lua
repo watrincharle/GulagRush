@@ -43,18 +43,34 @@ function hero.load()
     hero.radius = 32
     hero.life = 5
     hero.hitbox = hero.radius
+    hero.invinsibilityTimer = 1.2
+    hero.isInvincible = false
 end
 
 
-function hero:update()
+function hero:update(dt)
     hero.rotation = math.atan2(mY - hero.y, mX - hero.x)
     hero.moove()
+    if hero.isInvincible then
+        hero:invisibilityFrame(dt)
+    end
 end
 
+function hero:invisibilityFrame(dt)
+    hero.invinsibilityTimer = hero.invinsibilityTimer - dt
+    if hero.invinsibilityTimer <= 0 then
+        hero.isInvincible = false
+        hero.invinsibilityTimer = 1.2
+    end
+end
 
 
 function hero:draw()
+    if hero.isInvincible then
+        love.graphics.setColor(1, 0, 0, 0.5)
+    end
     love.graphics.draw(hero.sprite, hero.x, hero.y, hero.rotation, .5 ,.5 , hero.width/2, hero.height/2)
+    love.graphics.setColor(1, 1, 1, 1)
     love.graphics.print(hero.life, 100, 100, 0, 3, 3)
 end
 
