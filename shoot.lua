@@ -29,7 +29,11 @@ function shoot.load(pShooter, pIndex)
             end
         elseif pIndex == "ennemy" then
             if checkShootCollision(hero, s) then
-                hero.life = hero.life - 1
+                
+                if not hero.isInvincible then
+                    hero.life = hero.life - 1
+                    hero.isInvincible = true
+                end
                 s.isFree = true
             end
         end
