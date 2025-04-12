@@ -11,11 +11,9 @@ bullets = {}
 
 function love.load()
     print("loading ...")
-    love.window.setMode(1280, 720, {fullscreen = false, fullscreentype = "exclusive"})
-    print("Screen size loaded .")
     love.graphics.setDefaultFilter("nearest", "nearest")
     print("filter loaded .")
-    love.window.setMode(1280, 720)
+    love.window.setMode(1600, 900)
     print("screen mode loaded .")
     map.load()
     print("map loaded .")
@@ -86,9 +84,4 @@ function love.keypressed(key)
         a.isReloading = true
     end
 
-    if key == "f" and love.window.setMode(1280, 720, {fullscreen = true, fullscreentype = "exclusive"}) then
-        love.window.setMode(1280, 720, {fullscreen = false, fullscreentype = "exclusive"})
-    elseif key =="f" and not love.window.setMode(1280, 720, {fullscreen = true, fullscreentype = "exclusive"}) then
-        love.window.setMode(1280, 720, {fullscreen = true, fullscreentype = "exclusive"})
-    end
 end
