@@ -39,12 +39,7 @@ end
 
 function game.draw()
     map.draw()
-    hero.draw()
-    if #ennemies > 0 then
-        for _, e in ipairs(ennemies) do
-            e:draw()
-        end
-    end
+
     if #bullets > 0 then
         for _, s in ipairs(bullets) do
             s:draw() 
@@ -54,6 +49,12 @@ function game.draw()
     if #bulletDrop > 0 then
         for _, db in ipairs(bulletDrop) do
             db:draw()
+        end
+    end
+    hero.draw()
+    if #ennemies > 0 then
+        for _, e in ipairs(ennemies) do
+            e:draw()
         end
     end
 end
