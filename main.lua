@@ -4,9 +4,11 @@ local enemyModule = require("enemyModule")
 local shoot = require("shoot")
 colision = require("collision")
 local ammoManager = require("ammoManager")
-local menu = require("screens/menu")
-local pause = require("screens/pause")
-local gameOver = require("screens/gameOver")
+local menu = require("scenes/menu")
+local pause = require("scenes/pause")
+local gameOver = require("scenes/gameOver")
+local game = require("scenes/game")
+local init = require("init")
 
 ennemies = {}
 bullets = {}
@@ -14,16 +16,11 @@ Screen_Mode = "menu"
 
 
 function love.load()
-    print("loading ...")
     love.graphics.setDefaultFilter("nearest", "nearest")
-    print("filter loaded .")
     love.window.setMode(1600, 900)
-    print("screen mode loaded .")
     menu.load()
     map.load()
-    print("map loaded .")
     hero.load()
-    print("hero loaded .")
     ammoManager.load()
     screenWidth = love.graphics.getWidth()
     screenHeight = love.graphics.getHeight()
@@ -37,30 +34,7 @@ function love.update(dt)
     if Screen_Mode == "menu" then
 
     elseif Screen_Mode == "game" then
-        mX, mY = love.mouse.getPosition()
-        map.update()
-        hero:update(dt)
-        if #ennemies > 0 then
-            for _, e in ipairs(ennemies) do
-                e:update(dt)  
-            end
-            for i = #ennemies, 1, -1 do
-                if ennemies[i].isFree == true then
-                    table.remove(ennemies, i)
-                end
-            end
-        end
-        if #bullets > 0 then
-            for _, s in ipairs(bullets) do
-                s:update(dt) 
-            end
-            for i = #bullets, 1, -1 do
-                if bullets[i].isFree == true then
-                    table.remove(bullets, i)
-                end
-            end
-        end
-        ammoManager.update(dt)
+        game:update(dt)
     elseif Screen_Mode == "pause" then
 
     elseif Screen_Mode == "gameOver" then
@@ -73,48 +47,10 @@ function love.draw()
     if Screen_Mode == "menu" then
         menu.draw()
     elseif Screen_Mode == "game" then
-        map.draw()
-        hero.draw()
-        if #ennemies > 0 then
-            for _, e in ipairs(ennemies) do
-                e:draw()
-            end
-        end
-        if #bullets > 0 then
-            for _, s in ipairs(bullets) do
-                s:draw() 
-            end
-        end
-        ammoManager.draw()
+        game.draw()
     elseif Screen_Mode == "pause" then
-        map.draw()
-        hero.draw()
-        if #ennemies > 0 then
-            for _, e in ipairs(ennemies) do
-                e:draw()
-            end
-        end
-        if #bullets > 0 then
-            for _, s in ipairs(bullets) do
-                s:draw() 
-            end
-        end
-        ammoManager.draw()
-        pause.draw()
+       pause.draw()
     elseif Screen_Mode == "gameOver" then
-        map.draw()
-        hero.draw()
-        if #ennemies > 0 then
-            for _, e in ipairs(ennemies) do
-                e:draw()
-            end
-        end
-        if #bullets > 0 then
-            for _, s in ipairs(bullets) do
-                s:draw() 
-            end
-        end
-        ammoManager.draw()
         gameOver.draw()
     end
 end
@@ -123,11 +59,7 @@ function love.mousepressed(x, y, button)
     if Screen_Mode == "menu" then
         if button == 1 and x >= 150 and x <= 470 and y >= 400 and y <= 520 then
             Screen_Mode = "game"
-            ammoManager.init()
-            hero.init()
-            map.init()
-            ennemies = {}
-            bullets = {}
+            init.init()
         elseif button == 1 and x >= 150 and x <= 470 and y >= 600 and y <= 720 then
             love.event.quit()
         end
