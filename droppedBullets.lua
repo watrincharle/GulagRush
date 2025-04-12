@@ -11,6 +11,17 @@ function droppedBullets.load(pEx, pEy)
 
     function db:update(dt)
         db:stayAtTheRightPosition()
+        if checkCollision(db, hero) then
+            if a.ammoInPocket <= 149 then
+                a.ammoInPocket = a.ammoInPocket + db.value
+                db.isFree = true
+                if a.ammoInPocket >= 150 then
+                    a.ammoInPocket = 150
+                end
+            elseif a.ammoInPocket >= 150 then
+                a.ammoInPocket = 150
+            end
+        end
     end 
 
 
@@ -43,7 +54,7 @@ function droppedBullets.load(pEx, pEy)
 
 
     function db:draw()
-        love.graphics.draw(db.sprite, db.x, db.y, 0, .5, .5)
+        love.graphics.draw(db.sprite, db.x, db.y, 0, .5, .5, 8, 8)
     end
 
 
