@@ -5,4 +5,21 @@ function gameOver.draw()
     love.graphics.draw(exitButton, 640, 700, 0, 8, 8)
 end
 
+function gameOver.draw()
+    map.draw()
+    hero.draw()
+    if #ennemies > 0 then
+        for _, e in ipairs(ennemies) do
+            e:draw()
+        end
+    end
+    if #bullets > 0 then
+        for _, s in ipairs(bullets) do
+            s:draw() 
+        end
+    end
+    ammoManager.draw()
+    gameOver.draw()
+end
+
 return gameOver
