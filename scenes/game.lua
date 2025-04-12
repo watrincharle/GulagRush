@@ -24,6 +24,16 @@ function game:update(dt)
                 end
             end
         end
+        if #bulletDrop > 0 then
+            for _, db in ipairs(bulletDrop) do
+                db:update(dt)
+            end
+            for i = #bulletDrop, 1, -1 do
+                if bulletDrop[i].isFree == true then
+                    table.remove(bulletDrop, i)
+                end
+            end
+        end
         ammoManager.update(dt)
 end
 
@@ -41,6 +51,11 @@ function game.draw()
         end
     end
     ammoManager.draw()
+    if #bulletDrop > 0 then
+        for _, db in ipairs(bulletDrop) do
+            db:draw()
+        end
+    end
 end
 
 return game
