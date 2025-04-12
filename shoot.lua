@@ -21,14 +21,14 @@ function shoot.load(pShooter, pIndex)
         if pIndex == "hero" then
             if #ennemies > 0 then
                 for _, e in ipairs(ennemies) do
-                    if checkShootCollision(e, s) then
+                    if checkCollision(e, s) then
                         e.life = e.life - 1
                         s.isFree = true
                     end
                 end
             end
         elseif pIndex == "ennemy" then
-            if checkShootCollision(hero, s) then
+            if checkCollision(hero, s) then
                 
                 if not hero.isInvincible then
                     hero.life = hero.life - 1

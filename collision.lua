@@ -22,7 +22,7 @@ function checkCircleCollision(a, b, c)
     end
 end
 
-function checkShootCollision(a, b)
+function checkCollision(a, b)
     local dx = a.x - b.x
     local dy = a.y - b.y
     local distance = math.sqrt(dx * dx + dy * dy)
