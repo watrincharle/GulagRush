@@ -55,4 +55,12 @@ function ammoManager.draw()
 
 end
 
+function ammoManager.init()
+    a.ammoInPocket = 100
+    a.ammoInMag = 30
+    a.reloadTimer = 2
+    a.isReloading = false
+    a.isEmpty = false
+end
+
 return ammoManager
