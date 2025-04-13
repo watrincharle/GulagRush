@@ -29,6 +29,43 @@ function checkCollision(a, b)
     return distance < (a.hitbox + b.hitbox)
 end
 
+function checkWallCollision()
+    hero.isCollided = isWallCollided(hero)
+end
+
+function getTileIndexes(x, y)
+    local tileX = math.floor((map.posX - x) / map.tileSize) + 1
+    local tileY = math.floor((map.posY - y) / map.tileSize) + 1
+    return math.abs(tileX), math.abs(tileY)
+end
+
+
+function isNextSideWall(pObject, vx, vy)
+    local sideX = pObject.x + vx * (pObject.width * .5 + 2)
+    local sideY =  pObject.y + vy * (pObject.height * .5 + 2)
+    local corner1 = { -- vx = 1 | vy = 0
+        x = sideX + vy * pObject.width * .5, -- x = sideX
+        y = sideY + vx * pObject.height * .5 -- y = sideY + height/2
+    }
+    local corner2 = {
+        x = sideX - vy * pObject.width * .5, -- x = sideX
+        y = sideY - vx * pObject.height * .5 -- y = sideY - height/2
+    }
+    local tX1, tY1 = getTileIndexes(corner1.x, corner1.y)
+    local tX2, tY2 = getTileIndexes(corner2.x, corner2.y)
+    if mapData[tY1] and mapData[tY1][tX1] == 2 then
+        return true
+    end
+    if mapData[tY2] and mapData[tY2][tX2] == 2 then
+        return true
+    end
+    return false
+end
+
+
+
+
+
 function bulletOutOfRange(a)
     if a.x >= screenWidth or a.x <= 0 or a.y >= screenHeight or a.y <= 0 then
         return true
