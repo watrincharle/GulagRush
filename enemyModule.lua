@@ -39,12 +39,32 @@ function enemyModule.load()
             table.insert(bulletDrop, droppedBullets.load(e.x, e.y))
             table.insert(healthDrop, droppedHealth.load(e.x, e.y))
         end 
+        e:isOnTheWall()
+    end
+
+    function e:isOnTheWall()
+        if isNextSideWall(e, 1, 0) then
+            e.y = e.y - 2
+            e.rotation = e.rotation + math.pi
+            e.STATE = "isSearching"
+        elseif isNextSideWall(e, -1, 0) then
+            e.y = e.y + 2
+            e.rotation = e.rotation + math.pi
+            e.STATE = "isSearching"
+        elseif isNextSideWall(e, 0, 1) then
+            e.x = e.x - 2
+            e.rotation = e.rotation + math.pi
+            e.STATE = "isSearching"
+        elseif isNextSideWall(e, 0, -1) then
+            e.x = e.x + 2
+            e.rotation = e.rotation + math.pi
+            e.STATE = "isSearching"
+        end
     end
 
 
 
     function e:isSearching(dt)
-        
         local speedPatrol = e.speed / 2
         e.x = e.x + speedPatrol * dt * math.cos(e.rotation)
         e.y = e.y + speedPatrol * dt * math.sin(e.rotation)
@@ -64,38 +84,57 @@ function enemyModule.load()
             e.STATE = "chaseTarget"
         elseif e.timerSearching <= 0 then
             e.STATE = "isSearching"
-            e.angle = math.random(0, 2 * math.pi)
+            e.rotation = math.random(0, 2 * math.pi)
             e.timerSearching = math.random(0.5, 2)
         end
     end
 
     function e:stayAtTheRightPosition()
         if not love.keyboard.isDown("z") or not love.keyboard.isDown("q") or not love.keyboard.isDown("s") or not love.keyboard.isDown("d") then
-            local dX = 0
-            local dY = 0
+            dX = 0
+            dY = 0
         end
-        if love.keyboard.isDown("z") and map.posY <= hero.y then
-            dY = dY + 1
+        if love.keyboard.isDown("z") and map.posY + map.tileSize + hero.sizeY <= hero.y then
+            if not isNextSideWall(e, 0, -1) then
+                dY = dY + 1
+            else
+                dY = 0
+            end
         end
-        if love.keyboard.isDown("s") and hero.y + 32 <= (map.posY + map.height) then
-            dY = dY - 1
+        if love.keyboard.isDown("s") and hero.y + 32 <= (map.posY + map.height + map.tileSize) then
+            if not isNextSideWall(e, 0, 1) then
+                dY = dY - 1
+            else
+                dY = 0
+            end
         end
-        if love.keyboard.isDown("q") and map.posX <= hero.x then
-            dX = dX + 1
+        if love.keyboard.isDown("q") and map.posX + map.tileSize + hero.sizeX <= hero.x then
+            if not isNextSideWall(e, -1, 0) then
+                dX = dX + 1
+            else
+                dX = 0
+            end
         end
-        if love.keyboard.isDown("d") and hero.x + 32 <= (map.posX + map.width) then
-            dX = dX - 1
+        if love.keyboard.isDown("d") and hero.x + 32 <= (map.posX + map.width + map.tileSize) then
+            if not isNextSideWall(e, 1, 0) then
+                dX = dX - 1
+            else
+                dX = 0
+            end
         end
         local magnitude = math.sqrt(dX * dX + dY * dY)
         if magnitude > 0 then
             dX = dX / magnitude
             dY = dY / magnitude
         end
-        e.x = e.x + dX * hero.speed
-        e.y = e.y + dY * hero.speed
+        newPosX = e.x + dX * hero.speed
+        newPosY = e.y + dY * hero.speed
+            e.x = newPosX
+            e.y = newPosY
     end
 
     function e:chaseTarget(dt)
+        e:isOnTheWall()
         e.rotation = math.atan2(hero.y - e.y, hero.x - e.x)
         e.x = e.x + e.speed * dt * math.cos(e.rotation)
         e.y = e.y + e.speed * dt * math.sin(e.rotation)
@@ -111,6 +150,7 @@ function enemyModule.load()
 
 
     function e:getBack(dt)
+        e:isOnTheWall()
         local angleAway = math.atan2(e.y - hero.y, e.x - hero.x)
         e.x = e.x + e.speed * dt * math.cos(angleAway)
         e.y = e.y + e.speed * dt * math.sin(angleAway)
@@ -121,6 +161,7 @@ function enemyModule.load()
 
 
     function e:shoot(dt)
+        e:isOnTheWall()
         e.rotation = math.atan2(hero.y - e.y, hero.x - e.x)
         e.timerLoading = e.timerLoading - dt
         if e.timerLoading <= 0 then
@@ -136,13 +177,13 @@ function enemyModule.load()
     end
     
     function e:draw()
-        love.graphics.draw(e.sprite, e.x, e.y, e.rotation, .5, .5, e.width * .5 , e.height * .5)
+        love.graphics.draw(e.sprite, e.x, e.y, e.rotation, 1, 1, e.width * .5 , e.height * .5)
         if e.life >= 1 then
-            love.graphics.draw(e.heart, e.x - 16, e.y - 32, 0, .5, .5, e.heart:getWidth() * .5 , e.heart:getHeight() * .5)
+            love.graphics.draw(e.heart, e.x - 16, e.y - 64, 0, 1, 1, e.heart:getWidth() * .5 , e.heart:getHeight() * .5)
             if e.life >= 2 then
-                love.graphics.draw(e.heart, e.x, e.y - 32, 0, .5, .5, e.heart:getWidth() * .5 , e.heart:getHeight() * .5)
+                love.graphics.draw(e.heart, e.x, e.y - 64, 0, 1, 1, e.heart:getWidth() * .5 , e.heart:getHeight() * .5)
                 if e.life >=3 then
-                    love.graphics.draw(e.heart, e.x + 16, e.y - 32, 0, .5, .5, e.heart:getWidth() * .5 , e.heart:getHeight() * .5)
+                    love.graphics.draw(e.heart, e.x + 16, e.y - 64, 0, 1, 1, e.heart:getWidth() * .5 , e.heart:getHeight() * .5)
                 end
             end
         end

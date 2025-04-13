@@ -8,6 +8,8 @@ function droppedBullets.load(pEx, pEy)
     db.hitbox = 16
     db.value = math.random(3, 9)
     db.isFree = false
+    db.width = db.sprite:getWidth()
+    db.height = db.sprite:getHeight()
 
     function db:update(dt)
         db:stayAtTheRightPosition()
@@ -28,33 +30,53 @@ function droppedBullets.load(pEx, pEy)
 
     function db:stayAtTheRightPosition()
         if not love.keyboard.isDown("z") or not love.keyboard.isDown("q") or not love.keyboard.isDown("s") or not love.keyboard.isDown("d") then
-            local dX = 0
-            local dY = 0
+            dX = 0
+            dY = 0
         end
-        if love.keyboard.isDown("z") and map.posY <= hero.y then
-            dY = dY + 1
+        if love.keyboard.isDown("z") and map.posY + map.tileSize + hero.sizeY <= hero.y then
+            if not isNextSideWall(db, 0, -1) then
+                dY = dY + 1
+            else
+                dY = 0
+            end
         end
-        if love.keyboard.isDown("s") and hero.y + 32 <= (map.posY + map.height) then
-            dY = dY - 1
+        if love.keyboard.isDown("s") and hero.y + 32 <= (map.posY + map.height + map.tileSize) then
+            if not isNextSideWall(db, 0, 1) then
+                dY = dY - 1
+            else
+                dY = 0
+            end
         end
-        if love.keyboard.isDown("q") and map.posX <= hero.x then
-            dX = dX + 1
+        if love.keyboard.isDown("q") and map.posX + map.tileSize + hero.sizeX <= hero.x then
+            if not isNextSideWall(db, -1, 0) then
+                dX = dX + 1
+            else
+                dX = 0
+            end
         end
-        if love.keyboard.isDown("d") and hero.x + 32 <= (map.posX + map.width) then
-            dX = dX - 1
+        if love.keyboard.isDown("d") and hero.x + 32 <= (map.posX + map.width + map.tileSize) then
+            if not isNextSideWall(db, 1, 0) then
+                dX = dX - 1
+            else
+                dX = 0
+            end
         end
         local magnitude = math.sqrt(dX * dX + dY * dY)
         if magnitude > 0 then
             dX = dX / magnitude
             dY = dY / magnitude
         end
-        db.x = db.x + dX * hero.speed
-        db.y = db.y + dY * hero.speed
+        newPosX = db.x + dX * hero.speed
+        newPosY = db.y + dY * hero.speed
+
+            db.x = newPosX
+            db.y = newPosY
+
     end
 
 
     function db:draw()
-        love.graphics.draw(db.sprite, db.x, db.y, 0, .5, .5, 8, 8)
+        love.graphics.draw(db.sprite, db.x, db.y, 0, 1, 1, 8, 8)
     end
 
 

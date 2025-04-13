@@ -32,6 +32,11 @@ function love.load()
 end
 
 function love.update(dt)
+    if love.keyboard.isDown("lshift") then
+        hero.speed = 10
+    else
+        hero.speed = 3
+    end
     if not hero.isAlive then
         Screen_Mode = "gameOver"
         hero.isAlive = true
