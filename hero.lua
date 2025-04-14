@@ -72,11 +72,16 @@ function hero.load()
     hero.invinsibilityTimer = 1.2
     hero.isInvincible = false
     hero.isAlive = true
+    hero.dash = false
+    hero.dashTimer = 3
+    hero.dashSprite = love.graphics.newImage("sprites/dash.png")
+    hero.dashSpriteWidth = hero.dashSprite:getWidth()
+    hero.dashSpriteHeight = hero.dashSprite:getHeight()
 end
 
 
 function hero:update(dt)
-    
+    hero:doTheDash(dt)
     hero.rotation = math.atan2(mY - hero.y, mX - hero.x)
     hero.moove()
     if hero.isInvincible then
@@ -85,6 +90,20 @@ function hero:update(dt)
     if hero.life <= 0 then
         hero.isAlive = false
     end
+end
+
+function hero:doTheDash(dt)
+    if hero.speed > 3 then
+        hero.speed = hero.speed - 0.5
+    end
+    if hero.dash then
+        hero.dashTimer = hero.dashTimer - dt
+    end
+    if hero.dashTimer <= 0 then
+        hero.dash = false
+        hero.dashTimer = 3
+    end
+
 end
 
 function hero:invisibilityFrame(dt)
@@ -97,6 +116,14 @@ end
 
 
 function hero:draw()
+    if hero.dash then
+        love.graphics.setColor(0, 0, 0, .3)
+        love.graphics.draw(hero.dashSprite, 100, screenHeight - 100, 0, 1, 1)
+        love.graphics.setColor(1, 1, 1, 1)
+
+    elseif not hero.dash then
+        love.graphics.draw(hero.dashSprite, 100, screenHeight - 100, 0, 1, 1)
+    end
     if hero.isInvincible then
         love.graphics.setColor(1, 0, 0, 0.5)
     end

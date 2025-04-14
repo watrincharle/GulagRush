@@ -32,11 +32,8 @@ function love.load()
 end
 
 function love.update(dt)
-    if love.keyboard.isDown("lshift") then
-        hero.speed = 10
-    else
-        hero.speed = 3
-    end
+    
+
     if not hero.isAlive then
         Screen_Mode = "gameOver"
         hero.isAlive = true
@@ -94,6 +91,10 @@ function love.keypressed(key)
     if Screen_Mode == "menu" then
 
     elseif Screen_Mode == "game" then
+        if key == "lshift" and not hero.dash then
+            hero.speed = 15
+            hero.dash = true
+        end
         if key == "e" then
             local newEnemy = enemyModule.load() 
             table.insert(ennemies, newEnemy) 
