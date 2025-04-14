@@ -12,8 +12,10 @@ hero.moove = function()
     if not love.keyboard.isDown("z") or not love.keyboard.isDown("q") or not love.keyboard.isDown("s") or not love.keyboard.isDown("d") then
         dX = 0
         dY = 0
+        hero.isMooving = false
     end
     if love.keyboard.isDown("z") and map.posY + map.tileSize + hero.sizeY <= hero.y then
+        hero.isMooving = true
         if not isNextSideWall(hero, 0, -1) then
             dY = dY + 1
         else
@@ -21,6 +23,7 @@ hero.moove = function()
         end
     end
     if love.keyboard.isDown("s") and hero.y + 32 <= (map.posY + map.height + map.tileSize) then
+        hero.isMooving = true
         if not isNextSideWall(hero, 0, 1) then
             dY = dY - 1
         else
@@ -28,6 +31,7 @@ hero.moove = function()
         end
     end
     if love.keyboard.isDown("q") and map.posX + map.tileSize + hero.sizeX <= hero.x then
+        hero.isMooving = true
         if not isNextSideWall(hero, -1, 0) then
             dX = dX + 1
         else
@@ -35,6 +39,7 @@ hero.moove = function()
         end
     end
     if love.keyboard.isDown("d") and hero.x + 32 <= (map.posX + map.width + map.tileSize) then
+        hero.isMooving = true
         if not isNextSideWall(hero, 1, 0) then
             dX = dX - 1
         else
@@ -73,6 +78,7 @@ function hero.load()
     hero.isInvincible = false
     hero.isAlive = true
     hero.dash = false
+    hero.isMooving = false
     hero.dashTimer = 3
     hero.dashSprite = love.graphics.newImage("sprites/dash.png")
     hero.dashSpriteWidth = hero.dashSprite:getWidth()
