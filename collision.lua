@@ -62,10 +62,6 @@ function isNextSideWall(pObject, vx, vy)
     return false
 end
 
-
-
-
-
 function bulletOutOfRange(a)
     if a.x >= screenWidth or a.x <= 0 or a.y >= screenHeight or a.y <= 0 then
         return true

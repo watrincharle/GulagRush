@@ -16,6 +16,9 @@ function shoot.load(pShooter, pIndex)
     
 
     function s:update(dt)
+        if isNextSideWall(s, 0, 0) then
+            s.isFree = true
+        end
         s.x = s.x + s.speed * dt * math.cos(s.rotation)
         s.y = s.y + s.speed * dt * math.sin(s.rotation)
         if pIndex == "hero" then

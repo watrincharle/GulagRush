@@ -18,8 +18,20 @@ function droppedHealth.load(pEx, pEy)
                 dh.isFree = true
             end
         end
+        dh:isOnTheWall()
     end 
 
+    function dh:isOnTheWall()
+        if isNextSideWall(dh, 1, 0) then
+            dh.x = dh.x - 3
+        elseif isNextSideWall(dh, -1, 0) then
+            dh.x = dh.x + 3
+        elseif isNextSideWall(dh, 0, 1) then
+            dh.y = dh.y - 3
+        elseif isNextSideWall(dh, 0, -1) then
+            dh.y = dh.y + 3
+        end
+    end
 
 
     function dh:stayAtTheRightPosition()
@@ -28,28 +40,28 @@ function droppedHealth.load(pEx, pEy)
             dY = 0
         end
         if love.keyboard.isDown("z") and map.posY + map.tileSize + hero.sizeY <= hero.y then
-            if not isNextSideWall(dh, 0, -1) then
+            if not isNextSideWall(hero, 0, -1) then
                 dY = dY + 1
             else
                 dY = 0
             end
         end
         if love.keyboard.isDown("s") and hero.y + 32 <= (map.posY + map.height + map.tileSize) then
-            if not isNextSideWall(dh, 0, 1) then
+            if not isNextSideWall(hero, 0, 1) then
                 dY = dY - 1
             else
                 dY = 0
             end
         end
         if love.keyboard.isDown("q") and map.posX + map.tileSize + hero.sizeX <= hero.x then
-            if not isNextSideWall(dh, -1, 0) then
+            if not isNextSideWall(hero, -1, 0) then
                 dX = dX + 1
             else
                 dX = 0
             end
         end
         if love.keyboard.isDown("d") and hero.x + 32 <= (map.posX + map.width + map.tileSize) then
-            if not isNextSideWall(dh, 1, 0) then
+            if not isNextSideWall(hero, 1, 0) then
                 dX = dX - 1
             else
                 dX = 0

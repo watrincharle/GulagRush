@@ -24,7 +24,20 @@ function droppedBullets.load(pEx, pEy)
                 a.ammoInPocket = 150
             end
         end
+        db:isOnTheWall()
     end 
+
+    function db:isOnTheWall()
+        if isNextSideWall(db, 1, 0) then
+            db.x = db.x - 3
+        elseif isNextSideWall(db, -1, 0) then
+            db.x = db.x + 3
+        elseif isNextSideWall(db, 0, 1) then
+            db.y = db.y - 3
+        elseif isNextSideWall(db, 0, -1) then
+            db.y = db.y + 3
+        end
+    end
 
 
 
@@ -34,28 +47,28 @@ function droppedBullets.load(pEx, pEy)
             dY = 0
         end
         if love.keyboard.isDown("z") and map.posY + map.tileSize + hero.sizeY <= hero.y then
-            if not isNextSideWall(db, 0, -1) then
+            if not isNextSideWall(hero, 0, -1) then
                 dY = dY + 1
             else
                 dY = 0
             end
         end
         if love.keyboard.isDown("s") and hero.y + 32 <= (map.posY + map.height + map.tileSize) then
-            if not isNextSideWall(db, 0, 1) then
+            if not isNextSideWall(hero, 0, 1) then
                 dY = dY - 1
             else
                 dY = 0
             end
         end
         if love.keyboard.isDown("q") and map.posX + map.tileSize + hero.sizeX <= hero.x then
-            if not isNextSideWall(db, -1, 0) then
+            if not isNextSideWall(hero, -1, 0) then
                 dX = dX + 1
             else
                 dX = 0
             end
         end
         if love.keyboard.isDown("d") and hero.x + 32 <= (map.posX + map.width + map.tileSize) then
-            if not isNextSideWall(db, 1, 0) then
+            if not isNextSideWall(hero, 1, 0) then
                 dX = dX - 1
             else
                 dX = 0
