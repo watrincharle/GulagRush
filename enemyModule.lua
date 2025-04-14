@@ -44,19 +44,19 @@ function enemyModule.load()
 
     function e:isOnTheWall()
         if isNextSideWall(e, 1, 0) then
-            e.y = e.y - 2
+            e.x = e.x - 3
             e.rotation = e.rotation + math.pi
             e.STATE = "isSearching"
         elseif isNextSideWall(e, -1, 0) then
-            e.y = e.y + 2
+            e.x = e.x + 3
             e.rotation = e.rotation + math.pi
             e.STATE = "isSearching"
         elseif isNextSideWall(e, 0, 1) then
-            e.x = e.x - 2
+            e.y = e.y - 3
             e.rotation = e.rotation + math.pi
             e.STATE = "isSearching"
         elseif isNextSideWall(e, 0, -1) then
-            e.x = e.x + 2
+            e.y = e.y + 3
             e.rotation = e.rotation + math.pi
             e.STATE = "isSearching"
         end
@@ -95,28 +95,28 @@ function enemyModule.load()
             dY = 0
         end
         if love.keyboard.isDown("z") and map.posY + map.tileSize + hero.sizeY <= hero.y then
-            if not isNextSideWall(e, 0, -1) then
+            if not isNextSideWall(hero, 0, -1) then
                 dY = dY + 1
             else
                 dY = 0
             end
         end
         if love.keyboard.isDown("s") and hero.y + 32 <= (map.posY + map.height + map.tileSize) then
-            if not isNextSideWall(e, 0, 1) then
+            if not isNextSideWall(hero, 0, 1) then
                 dY = dY - 1
             else
                 dY = 0
             end
         end
         if love.keyboard.isDown("q") and map.posX + map.tileSize + hero.sizeX <= hero.x then
-            if not isNextSideWall(e, -1, 0) then
+            if not isNextSideWall(hero, -1, 0) then
                 dX = dX + 1
             else
                 dX = 0
             end
         end
         if love.keyboard.isDown("d") and hero.x + 32 <= (map.posX + map.width + map.tileSize) then
-            if not isNextSideWall(e, 1, 0) then
+            if not isNextSideWall(hero, 1, 0) then
                 dX = dX - 1
             else
                 dX = 0
