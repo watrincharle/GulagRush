@@ -23,13 +23,13 @@ function droppedHealth.load(pEx, pEy)
 
     function dh:isOnTheWall()
         if isNextSideWall(dh, 1, 0) then
-            dh.x = dh.x - 3
+            dh.x = dh.x - hero.speed
         elseif isNextSideWall(dh, -1, 0) then
-            dh.x = dh.x + 3
+            dh.x = dh.x + hero.speed
         elseif isNextSideWall(dh, 0, 1) then
-            dh.y = dh.y - 3
+            dh.y = dh.y - hero.speed
         elseif isNextSideWall(dh, 0, -1) then
-            dh.y = dh.y + 3
+            dh.y = dh.y + hero.speed
         end
     end
 

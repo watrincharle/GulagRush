@@ -44,19 +44,19 @@ function enemyModule.load()
 
     function e:isOnTheWall()
         if isNextSideWall(e, 1, 0) then
-            e.x = e.x - 3
+            e.x = e.x - hero.speed
             e.rotation = e.rotation + math.pi
             e.STATE = "isSearching"
         elseif isNextSideWall(e, -1, 0) then
-            e.x = e.x + 3
+            e.x = e.x + hero.speed
             e.rotation = e.rotation + math.pi
             e.STATE = "isSearching"
         elseif isNextSideWall(e, 0, 1) then
-            e.y = e.y - 3
+            e.y = e.y - hero.speed
             e.rotation = e.rotation + math.pi
             e.STATE = "isSearching"
         elseif isNextSideWall(e, 0, -1) then
-            e.y = e.y + 3
+            e.y = e.y + hero.speed
             e.rotation = e.rotation + math.pi
             e.STATE = "isSearching"
         end

@@ -29,13 +29,13 @@ function droppedBullets.load(pEx, pEy)
 
     function db:isOnTheWall()
         if isNextSideWall(db, 1, 0) then
-            db.x = db.x - 3
+            db.x = db.x - hero.speed
         elseif isNextSideWall(db, -1, 0) then
-            db.x = db.x + 3
+            db.x = db.x + hero.speed
         elseif isNextSideWall(db, 0, 1) then
-            db.y = db.y - 3
+            db.y = db.y - hero.speed
         elseif isNextSideWall(db, 0, -1) then
-            db.y = db.y + 3
+            db.y = db.y + hero.speed
         end
     end
 
