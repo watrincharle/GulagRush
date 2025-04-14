@@ -73,7 +73,7 @@ function shoot.load(pShooter, pIndex)
     end
 
     function s:draw()
-        love.graphics.draw(s.sprite, s.x, s.y, s.rotation, .5, .5, s.width / 2, s.height / 2)
+        love.graphics.draw(s.sprite, s.x, s.y, s.rotation, 1, 1, s.width / 2, s.height / 2)
     end
 
     return s 

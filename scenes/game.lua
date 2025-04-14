@@ -1,7 +1,6 @@
 game = {}
 
 function game:update(dt)
-
     mX, mY = love.mouse.getPosition()
         map.update()
         hero:update(dt)
