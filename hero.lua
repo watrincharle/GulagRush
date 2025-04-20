@@ -70,7 +70,7 @@ function hero.load()
     hero.width = hero.sprite:getWidth()
     hero.height = hero.sprite:getHeight()
     hero.rotation = 0
-    hero.speed = 3
+    hero.speed = 4
     hero.radius = 32
     hero.life = 5
     hero.hitbox = hero.radius
@@ -79,7 +79,7 @@ function hero.load()
     hero.isAlive = true
     hero.dash = false
     hero.isMooving = false
-    hero.dashTimer = 3
+    hero.dashTimer = 2
     hero.dashSprite = love.graphics.newImage("sprites/dash.png")
     hero.dashSpriteWidth = hero.dashSprite:getWidth()
     hero.dashSpriteHeight = hero.dashSprite:getHeight()
@@ -99,15 +99,15 @@ function hero:update(dt)
 end
 
 function hero:doTheDash(dt)
-    if hero.speed > 3 then
-        hero.speed = hero.speed - 0.5
+    if hero.speed > 4 then
+        hero.speed = hero.speed - 0.8
     end
     if hero.dash then
         hero.dashTimer = hero.dashTimer - dt
     end
     if hero.dashTimer <= 0 then
         hero.dash = false
-        hero.dashTimer = 3
+        hero.dashTimer = 2
     end
 
 end

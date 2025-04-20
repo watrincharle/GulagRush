@@ -2,8 +2,8 @@
 map0 = {}
 
 map0Data = {
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 1, 1, 12, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 1, 1, 13, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 1, 12, 12, 12, 12, 1, 6, 12, 12, 10, 1, 6, 12, 12, 10, 1, 6, 12, 12, 10, 1, 6, 12, 12, 10, 1, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 1},
     {1, 1, 12, 12, 12, 12, 1, 11, 12, 12, 12, 1, 11, 12, 12, 12, 1, 11, 12, 12, 12, 1, 11, 12, 12, 12, 1, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 1},
     {1, 1, 12, 12, 12, 12, 1, 12, 12, 12, 12, 1, 12, 12, 12, 12, 1, 12, 12, 12, 12, 1, 12, 12, 12, 12, 1, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 1},
@@ -40,7 +40,8 @@ map0Data = {
 --   t10 = toilets with shadow included and poop
 --   t11 = bed, down part
 --   t12 = ground
---   t13 = door, to add individually
+--   t13 = door, with collision (inside the mapData)
+--   t14 = door, without collision, to add individually
   -------------------------------------------------------------------------------------------------------------------
   -------------------------------------------------------------------------------------------------------------------
 
@@ -57,15 +58,16 @@ function map0:load()
     map0.t10 = love.graphics.newImage("sprites/toilets.png")
     map0.t11 = love.graphics.newImage("sprites/bed2.png")
     map0.t12 = love.graphics.newImage("sprites/ground.png")
-    map0.t13 = love.graphics.newImage("sprites/door.png")
+    map0.t13 = love.graphics.newImage("sprites/doorCollision.png")
+    map0.t14 = love.graphics.newImage("sprites/door.png")
     map0.tileSize = 64
     map0.col = 20
     map0.row = 40
     map0.width = (map0.tileSize * map0.row) 
     map0.height = (map0.tileSize * map0.col) 
-    map0.posX = love.graphics.getWidth()/2 - map0.width/2 + map0.tileSize * 2
-    map0.posY = love.graphics.getHeight()/2 - map0.height/2 + map0.tileSize * 2
-    map0.hitbox = map0.tileSize
+    map0.posX = love.graphics.getWidth()/2 - map0.width/2 +map0.tileSize * 4
+    map0.posY = love.graphics.getHeight()/2 - map0.height/2 + map0.tileSize * 4
+    map0.hitbox = 32
 end
 
 
@@ -107,12 +109,13 @@ function map0:draw()
             
         end
     end
+    --love.graphics.draw(map0.t13, map0.posX + 4*map0.tileSize, map0.posY + 2*map0.tileSize, 0, 4, 4)
 end
 
 
 function map0.init()
-    map0.posX = love.graphics.getWidth()/2 - map0.width/2 
-    map0.posY = love.graphics.getHeight()/2 - map0.height/2
+    map0.posX = love.graphics.getWidth()/2 - map0.tileSize * 5
+    map0.posY = love.graphics.getHeight()/2 - map0.tileSize * 5
 end 
 
 return map0

@@ -92,7 +92,7 @@ function love.keypressed(key)
 
     elseif Screen_Mode == "game" then
         if key == "lshift" and not hero.dash and hero.isMooving then
-            hero.speed = 15
+            hero.speed = 20
             hero.dash = true
         end
         if key == "e" then
