@@ -53,10 +53,10 @@ function isNextSideWall(pObject, vx, vy)
     }
     local tX1, tY1 = getTileIndexes(corner1.x, corner1.y)
     local tX2, tY2 = getTileIndexes(corner2.x, corner2.y)
-    if map0Data[tY1] and map0Data[tY1][tX1] == 2 then
+    if map0Data[tY1] and map0Data[tY1][tX1] ~= 2 and map0Data[tY1] and map0Data[tY1][tX1] ~= 3 and map0Data[tY1] and map0Data[tY1][tX1] ~= 12 then
         return true
     end
-    if map0Data[tY2] and map0Data[tY2][tX2] == 2 then
+    if map0Data[tY1] and map0Data[tY1][tX1] ~= 2 and map0Data[tY1] and map0Data[tY1][tX1] ~= 3 and map0Data[tY1] and map0Data[tY1][tX1] ~= 12 then
         return true
     end
     return false
