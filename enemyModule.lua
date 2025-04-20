@@ -94,28 +94,28 @@ function enemyModule.load()
             dX = 0
             dY = 0
         end
-        if love.keyboard.isDown("z") and map.posY + map.tileSize + hero.sizeY <= hero.y then
+        if love.keyboard.isDown("z") and m0ap.posY + map0.tileSize + hero.sizeY <= hero.y then
             if not isNextSideWall(hero, 0, -1) then
                 dY = dY + 1
             else
                 dY = 0
             end
         end
-        if love.keyboard.isDown("s") and hero.y + 32 <= (map.posY + map.height + map.tileSize) then
+        if love.keyboard.isDown("s") and hero.y + 32 <= (m0ap.posY + m0ap.height + m0ap.tileSize) then
             if not isNextSideWall(hero, 0, 1) then
                 dY = dY - 1
             else
                 dY = 0
             end
         end
-        if love.keyboard.isDown("q") and map.posX + map.tileSize + hero.sizeX <= hero.x then
+        if love.keyboard.isDown("q") and m0ap.posX + m0ap.tileSize + hero.sizeX <= hero.x then
             if not isNextSideWall(hero, -1, 0) then
                 dX = dX + 1
             else
                 dX = 0
             end
         end
-        if love.keyboard.isDown("d") and hero.x + 32 <= (map.posX + map.width + map.tileSize) then
+        if love.keyboard.isDown("d") and hero.x + 32 <= (m0ap.posX + m0ap.width + m0ap.tileSize) then
             if not isNextSideWall(hero, 1, 0) then
                 dX = dX - 1
             else

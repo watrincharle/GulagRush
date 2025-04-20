@@ -51,16 +51,16 @@ function shoot.load(pShooter, pIndex)
             local dX = 0
             local dY = 0
         end
-        if love.keyboard.isDown("z") and map.posY <= hero.y then
+        if love.keyboard.isDown("z") and map0.posY <= hero.y then
             dY = dY + 1
         end
-        if love.keyboard.isDown("s") and hero.y + 32 <= (map.posY + map.height) then
+        if love.keyboard.isDown("s") and hero.y + 32 <= (map0.posY + map0.height) then
             dY = dY - 1
         end
-        if love.keyboard.isDown("q") and map.posX <= hero.x then
+        if love.keyboard.isDown("q") and map0.posX <= hero.x then
             dX = dX + 1
         end
-        if love.keyboard.isDown("d") and hero.x + 32 <= (map.posX + map.width) then
+        if love.keyboard.isDown("d") and hero.x + 32 <= (map0.posX + map0.width) then
             dX = dX - 1
         end
         local magnitude = math.sqrt(dX * dX + dY * dY)

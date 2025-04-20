@@ -2,7 +2,7 @@ game = {}
 
 function game:update(dt)
     mX, mY = love.mouse.getPosition()
-        map.update()
+        map0.update()
         hero:update(dt)
         if #ennemies > 0 then
             for _, e in ipairs(ennemies) do
@@ -48,7 +48,7 @@ function game:update(dt)
 end
 
 function game.draw()
-    map.draw()
+    map0.draw()
 
     if #bullets > 0 then
         for _, s in ipairs(bullets) do
