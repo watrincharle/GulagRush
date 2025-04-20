@@ -25,6 +25,25 @@ map0Data = {
   }
 
 
+
+  ---------------------------------------------------- TILES ID -----------------------------------------------------
+  -------------------------------------------------------------------------------------------------------------------
+--   t1 = wall
+--   t2 = stair
+--   t3 = shadowStair
+--   t4 = shadowChair but not used
+--   t5 = chair 
+--   t6 = bed, the top part
+--   t7 = fence
+--   t8 = desktop
+--   t9 = bullet
+--   t10 = toilets with shadow included and poop
+--   t11 = bed, down part
+--   t12 = ground
+--   t13 = door, to add individually
+  -------------------------------------------------------------------------------------------------------------------
+  -------------------------------------------------------------------------------------------------------------------
+
 function map0:load()
     map0.t1 = love.graphics.newImage("sprites/wall.png")
     map0.t2 = love.graphics.newImage("sprites/stair.png")
