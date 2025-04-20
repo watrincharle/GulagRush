@@ -63,8 +63,8 @@ end
 
 function hero.load()
     hero.sprite = love.graphics.newImage("sprites/hero.png")
-    hero.x = love.graphics.getWidth()/2 - 32
-    hero.y = love.graphics.getHeight()/2 - 32
+    hero.x = love.graphics.getWidth()/2 - 16
+    hero.y = love.graphics.getHeight()/2 - 16
     hero.sizeX = 32
     hero.sizeY = 32
     hero.width = hero.sprite:getWidth()
@@ -136,6 +136,7 @@ function hero:draw()
     love.graphics.draw(hero.sprite, hero.x, hero.y, hero.rotation, 1 , 1 , hero.width/2, hero.height/2)
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.print(hero.life, 100, 100, 0, 3, 3)
+    love.graphics.circle("line", hero.x, hero.y, hero.hitbox)
 end
 
 function hero.init()
