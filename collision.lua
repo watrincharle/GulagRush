@@ -41,22 +41,22 @@ end
 
 
 function isNextSideWall(pObject, vx, vy)
-    local sideX = pObject.x + vx * (pObject.width * .5 + 2)
+    local sideX = pObject.x + vx * (pObject.width *.5 + 2)
     local sideY =  pObject.y + vy * (pObject.height * .5 + 2)
     local corner1 = { -- vx = 1 | vy = 0
         x = sideX + vy * pObject.width * .5, -- x = sideX
-        y = sideY + vx * pObject.height * .5 -- y = sideY + height/2
+        y = sideY + vx * pObject.height * .5 -- y = sideY + hitbox/2
     }
     local corner2 = {
         x = sideX - vy * pObject.width * .5, -- x = sideX
-        y = sideY - vx * pObject.height * .5 -- y = sideY - height/2
+        y = sideY - vx * pObject.height * .5 -- y = sideY - hitbox/2
     }
     local tX1, tY1 = getTileIndexes(corner1.x, corner1.y)
     local tX2, tY2 = getTileIndexes(corner2.x, corner2.y)
-    if map0Data[tY1] and map0Data[tY1][tX1] ~= 2 and map0Data[tY1] and map0Data[tY1][tX1] ~= 3 and map0Data[tY1] and map0Data[tY1][tX1] ~= 12 then
+    if map0Data[tY1] and map0Data[tY1][tX1]  ~=2 and map0Data[tY1] and map0Data[tY1][tX1] ~= 3 and map0Data[tY1] and map0Data[tY1][tX1] ~= 12 then
         return true
     end
-    if map0Data[tY1] and map0Data[tY1][tX1] ~= 2 and map0Data[tY1] and map0Data[tY1][tX1] ~= 3 and map0Data[tY1] and map0Data[tY1][tX1] ~= 12 then
+    if map0Data[tY2] and map0Data[tY2][tX2] ~= 2 and map0Data[tY2] and map0Data[tY2][tX2] ~= 3 and map0Data[tY2] and map0Data[tY2][tX2] ~= 12 then
         return true
     end
     return false
