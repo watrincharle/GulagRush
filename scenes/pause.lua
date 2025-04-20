@@ -1,7 +1,7 @@
 pause = {}
 
 function pause.draw()
-    map.draw()
+    map0.draw()
     hero.draw()
     if #ennemies > 0 then
         for _, e in ipairs(ennemies) do
