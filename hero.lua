@@ -1,4 +1,4 @@
-local map = require ("map")
+local map0 = require("level0/map_0")
 
 hero = {}
 dX = 0
@@ -14,7 +14,7 @@ hero.moove = function()
         dY = 0
         hero.isMooving = false
     end
-    if love.keyboard.isDown("z") and map.posY + map.tileSize + hero.sizeY <= hero.y then
+    if love.keyboard.isDown("z") and map0.posY + map0.tileSize + hero.sizeY <= hero.y then
         hero.isMooving = true
         if not isNextSideWall(hero, 0, -1) then
             dY = dY + 1
@@ -22,7 +22,7 @@ hero.moove = function()
             dY = 0
         end
     end
-    if love.keyboard.isDown("s") and hero.y + 32 <= (map.posY + map.height + map.tileSize) then
+    if love.keyboard.isDown("s") and hero.y + 32 <= (map0.posY + map0.height + map0.tileSize) then
         hero.isMooving = true
         if not isNextSideWall(hero, 0, 1) then
             dY = dY - 1
@@ -30,7 +30,7 @@ hero.moove = function()
             dY = 0
         end
     end
-    if love.keyboard.isDown("q") and map.posX + map.tileSize + hero.sizeX <= hero.x then
+    if love.keyboard.isDown("q") and map0.posX + map0.tileSize + hero.sizeX <= hero.x then
         hero.isMooving = true
         if not isNextSideWall(hero, -1, 0) then
             dX = dX + 1
@@ -38,7 +38,7 @@ hero.moove = function()
             dX = 0
         end
     end
-    if love.keyboard.isDown("d") and hero.x + 32 <= (map.posX + map.width + map.tileSize) then
+    if love.keyboard.isDown("d") and hero.x + 32 <= (map0.posX + map0.width + map0.tileSize) then
         hero.isMooving = true
         if not isNextSideWall(hero, 1, 0) then
             dX = dX - 1
@@ -51,11 +51,11 @@ hero.moove = function()
         dX = dX / magnitude
         dY = dY / magnitude
     end
-    newPosX = map.posX + dX * hero.speed
-    newPosY = map.posY + dY * hero.speed
+    newPosX = map0.posX + dX * hero.speed
+    newPosY = map0.posY + dY * hero.speed
 
-        map.posX = newPosX
-        map.posY = newPosY
+        map0.posX = newPosX
+        map0.posY = newPosY
 
 
 
@@ -70,7 +70,7 @@ function hero.load()
     hero.width = hero.sprite:getWidth()
     hero.height = hero.sprite:getHeight()
     hero.rotation = 0
-    hero.speed = 3
+    hero.speed = 4
     hero.radius = 32
     hero.life = 5
     hero.hitbox = hero.radius
@@ -79,7 +79,7 @@ function hero.load()
     hero.isAlive = true
     hero.dash = false
     hero.isMooving = false
-    hero.dashTimer = 3
+    hero.dashTimer = 2
     hero.dashSprite = love.graphics.newImage("sprites/dash.png")
     hero.dashSpriteWidth = hero.dashSprite:getWidth()
     hero.dashSpriteHeight = hero.dashSprite:getHeight()
@@ -99,15 +99,15 @@ function hero:update(dt)
 end
 
 function hero:doTheDash(dt)
-    if hero.speed > 3 then
-        hero.speed = hero.speed - 0.5
+    if hero.speed > 4 then
+        hero.speed = hero.speed - 0.8
     end
     if hero.dash then
         hero.dashTimer = hero.dashTimer - dt
     end
     if hero.dashTimer <= 0 then
         hero.dash = false
-        hero.dashTimer = 3
+        hero.dashTimer = 2
     end
 
 end

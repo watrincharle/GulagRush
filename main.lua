@@ -1,4 +1,4 @@
-local map = require("map")
+local map0 = require("level0/map_0")
 local hero = require("hero")
 local enemyModule = require("enemyModule")
 local shoot = require("shoot")
@@ -24,7 +24,7 @@ function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
     love.window.setMode(1600, 900)
     menu.load()
-    map.load()
+    map0.load()
     hero.load()
     ammoManager.load()
     screenWidth = love.graphics.getWidth()
@@ -92,7 +92,7 @@ function love.keypressed(key)
 
     elseif Screen_Mode == "game" then
         if key == "lshift" and not hero.dash and hero.isMooving then
-            hero.speed = 15
+            hero.speed = 20
             hero.dash = true
         end
         if key == "e" then

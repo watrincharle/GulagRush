@@ -1,0 +1,121 @@
+
+map0 = {}
+
+map0Data = {
+    {1, 1, 1, 12, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 1, 1, 13, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 1, 12, 12, 12, 12, 1, 6, 12, 12, 10, 1, 6, 12, 12, 10, 1, 6, 12, 12, 10, 1, 6, 12, 12, 10, 1, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 1},
+    {1, 1, 12, 12, 12, 12, 1, 11, 12, 12, 12, 1, 11, 12, 12, 12, 1, 11, 12, 12, 12, 1, 11, 12, 12, 12, 1, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 1},
+    {1, 1, 12, 12, 12, 12, 1, 12, 12, 12, 12, 1, 12, 12, 12, 12, 1, 12, 12, 12, 12, 1, 12, 12, 12, 12, 1, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 1},
+    {1, 1, 12, 12, 12, 12, 1, 7, 7, 7, 7, 1, 7, 7, 7, 7, 1, 7, 7, 7, 7, 1, 7, 7, 7, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 12, 12, 12, 1, 1},
+    {1, 1, 12, 12, 12, 12, 1, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 1},
+    {1, 1, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 1},
+    {1, 1, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 1},
+    {1, 1, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 12, 12, 12, 1, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 12, 12, 12, 12, 12, 12, 12, 1, 12, 12, 12, 1, 1},
+    {1, 1, 12, 12, 12, 12, 12, 12, 12, 12, 2, 2, 2, 2, 2, 1, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 12, 12, 12, 1, 1},
+    {1, 1, 12, 12, 12, 12, 12, 12, 12, 12, 2, 2, 2, 2, 2, 1, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 12, 12, 12, 1, 1},
+    {1, 1, 12, 12, 12, 12, 12, 12, 12, 12, 2, 2, 2, 2, 2, 1, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 12, 12, 12, 1, 1},
+    {1, 1, 12, 12, 12, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 12, 12, 12, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 12, 12, 12, 1, 1},
+    {1, 1, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 12, 8, 8, 8, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 1},
+    {1, 1, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 12, 5, 5, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 1},
+    {1, 1, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 1, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+  }
+
+
+
+  ---------------------------------------------------- TILES ID -----------------------------------------------------
+  -------------------------------------------------------------------------------------------------------------------
+--   t1 = wall
+--   t2 = stair
+--   t3 = shadowStair
+--   t4 = shadowChair but not used
+--   t5 = chair 
+--   t6 = bed, the top part
+--   t7 = fence
+--   t8 = desktop
+--   t9 = bullet
+--   t10 = toilets with shadow included and poop
+--   t11 = bed, down part
+--   t12 = ground
+--   t13 = door, with collision (inside the mapData)
+--   t14 = door, without collision, to add individually
+  -------------------------------------------------------------------------------------------------------------------
+  -------------------------------------------------------------------------------------------------------------------
+
+function map0:load()
+    map0.t1 = love.graphics.newImage("sprites/wall.png")
+    map0.t2 = love.graphics.newImage("sprites/stair.png")
+    map0.t3 = love.graphics.newImage("sprites/shadowStair.png")
+    map0.t4 = love.graphics.newImage("sprites/shadowChair.png")
+    map0.t5 = love.graphics.newImage("sprites/chair.png")
+    map0.t6 = love.graphics.newImage("sprites/bed1.png")
+    map0.t7 = love.graphics.newImage("sprites/fence.png")
+    map0.t8 = love.graphics.newImage("sprites/desktop.png")
+    map0.t9 = love.graphics.newImage("sprites/bullet.png")
+    map0.t10 = love.graphics.newImage("sprites/toilets.png")
+    map0.t11 = love.graphics.newImage("sprites/bed2.png")
+    map0.t12 = love.graphics.newImage("sprites/ground.png")
+    map0.t13 = love.graphics.newImage("sprites/doorCollision.png")
+    map0.t14 = love.graphics.newImage("sprites/door.png")
+    map0.tileSize = 64
+    map0.col = 20
+    map0.row = 40
+    map0.width = (map0.tileSize * map0.row) 
+    map0.height = (map0.tileSize * map0.col) 
+    map0.posX = love.graphics.getWidth()/2 - map0.width/2 +map0.tileSize * 4
+    map0.posY = love.graphics.getHeight()/2 - map0.height/2 + map0.tileSize * 4
+    map0.hitbox = 32
+end
+
+
+
+function map0:update()
+
+end
+
+function map0:draw()
+    for y = 1, #map0Data do
+        for x = 1, #map0Data[y] do
+            if map0Data[y][x] == 1 then
+                love.graphics.draw(map0.t1, map0.posX + (x * map0.tileSize), map0.posY + (y * map0.tileSize), 0, 4, 4)
+            elseif map0Data[y][x] == 2 then
+                love.graphics.draw(map0.t2, map0.posX + (x * map0.tileSize), map0.posY + (y * map0.tileSize), 0, 4, 4)
+            elseif map0Data[y][x] == 3 then
+                love.graphics.draw(map0.t3, map0.posX + (x * map0.tileSize), map0.posY + (y * map0.tileSize), 0, 4, 4)
+            elseif map0Data[y][x] == 4 then
+                love.graphics.draw(map0.t4, map0.posX + (x * map0.tileSize), map0.posY + (y * map0.tileSize), 0, 4, 4)
+            elseif map0Data[y][x] == 5 then
+                love.graphics.draw(map0.t5, map0.posX + (x * map0.tileSize), map0.posY + (y * map0.tileSize), 0, 4, 4)
+            elseif map0Data[y][x] == 6 then
+                love.graphics.draw(map0.t6, map0.posX + (x * map0.tileSize), map0.posY + (y * map0.tileSize), 0, 4, 4)
+            elseif map0Data[y][x] == 7 then
+                love.graphics.draw(map0.t7, map0.posX + (x * map0.tileSize), map0.posY + (y * map0.tileSize), 0, 4, 4)
+            elseif map0Data[y][x] == 8 then
+                love.graphics.draw(map0.t8, map0.posX + (x * map0.tileSize), map0.posY + (y * map0.tileSize), 0, 4, 4)
+            elseif map0Data[y][x] == 9 then
+                love.graphics.draw(map0.t9, map0.posX + (x * map0.tileSize), map0.posY + (y * map0.tileSize), 0, 4, 4)
+            elseif map0Data[y][x] == 10 then
+                love.graphics.draw(map0.t10, map0.posX + (x * map0.tileSize), map0.posY + (y * map0.tileSize), 0, 4, 4)
+            elseif map0Data[y][x] == 11 then
+                love.graphics.draw(map0.t11, map0.posX + (x * map0.tileSize), map0.posY + (y * map0.tileSize), 0, 4, 4)
+            elseif map0Data[y][x] == 12 then
+                love.graphics.draw(map0.t12, map0.posX + (x * map0.tileSize), map0.posY + (y * map0.tileSize), 0, 4, 4)
+            elseif map0Data[y][x] == 13 then
+                love.graphics.draw(map0.t13, map0.posX + (x * map0.tileSize), map0.posY + (y * map0.tileSize), 0, 4, 4)
+            end
+            
+        end
+    end
+    --love.graphics.draw(map0.t13, map0.posX + 4*map0.tileSize, map0.posY + 2*map0.tileSize, 0, 4, 4)
+end
+
+
+function map0.init()
+    map0.posX = love.graphics.getWidth()/2 - map0.tileSize * 5
+    map0.posY = love.graphics.getHeight()/2 - map0.tileSize * 5
+end 
+
+return map0

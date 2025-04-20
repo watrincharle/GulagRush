@@ -3,7 +3,7 @@ init = {}
 function init.init()
     ammoManager.init()
     hero.init()
-    map.init()
+    map0.init()
     ennemies = {}
     bullets = {}
 end
