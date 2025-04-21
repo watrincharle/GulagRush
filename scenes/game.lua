@@ -4,6 +4,7 @@ function game:update(dt)
     mX, mY = love.mouse.getPosition()
         map0.update()
         hero:update(dt)
+        level0:update()
         if #ennemies > 0 then
             for _, e in ipairs(ennemies) do
                 e:update(dt)  
