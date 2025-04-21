@@ -22,6 +22,7 @@ Screen_Mode = "menu"
 
 
 function love.load()
+    
     love.graphics.setDefaultFilter("nearest", "nearest")
     love.window.setMode(1600, 900)
     menu.load()
@@ -30,6 +31,7 @@ function love.load()
     ammoManager.load()
     screenWidth = love.graphics.getWidth()
     screenHeight = love.graphics.getHeight()
+    level0.load()
 end
 
 function love.update(dt)
