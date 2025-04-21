@@ -2,8 +2,8 @@ enemyModule = {}
 
 function enemyModule.load(x, y)
     local e = {}
-    e.x = x * map0.tileSize + map0.posX
-    e.y = y * map0.tileSize + map0.posY
+    e.x = x * map0.tileSize + map0.posX + 64
+    e.y = y * map0.tileSize + map0.posY + 64
     e.sprite = love.graphics.newImage("sprites/ennemy.png")
     e.heart = love.graphics.newImage("sprites/heart.png")
     e.speed = 80
@@ -13,7 +13,7 @@ function enemyModule.load(x, y)
     e.timerSearching = math.random(0.5, 2)
     e.timerLoading = 1
     e.STATE = "isSearching"
-    e.radius = 300
+    e.radius = 350
     e.hitbox = 32
     e.width = e.sprite:getWidth()
     e.height = e.sprite:getHeight()
