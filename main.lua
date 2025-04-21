@@ -11,6 +11,8 @@ local game = require("scenes/game")
 local init = require("init")
 local droppedBullets = require("droppedBullets")
 local droppedHealth = require("droppedHealth")
+local level0 = require("level0/level0")
+local win = require("scenes/win")
 
 ennemies = {}
 bullets = {}
@@ -21,6 +23,7 @@ Screen_Mode = "menu"
 
 
 function love.load()
+    
     love.graphics.setDefaultFilter("nearest", "nearest")
     love.window.setMode(1600, 900)
     menu.load()
@@ -29,6 +32,7 @@ function love.load()
     ammoManager.load()
     screenWidth = love.graphics.getWidth()
     screenHeight = love.graphics.getHeight()
+    level0.load()
 end
 
 function love.update(dt)
@@ -46,6 +50,8 @@ function love.update(dt)
 
     elseif Screen_Mode == "gameOver" then
 
+    elseif Screen_Mode == "win" then
+
     end
     
 end
@@ -59,6 +65,8 @@ function love.draw()
        pause.draw()
     elseif Screen_Mode == "gameOver" then
         gameOver.draw()
+    elseif Screen_Mode == "win" then
+        win.draw()
     end
 end
 
@@ -102,10 +110,6 @@ function love.keypressed(key)
             hero.speed = 20
             hero.dash = true
         end
-        if key == "e" then
-            local newEnemy = enemyModule.load() 
-            table.insert(ennemies, newEnemy) 
-        end
 
         if key == "r" and not a.isReloading and not a.isEmpty and a.ammoInMag <= 29 then
             a.isReloading = true
@@ -116,6 +120,10 @@ function love.keypressed(key)
     elseif Screen_Mode == "pause" then
         if key == "escape" then
             Screen_Mode = "game"
+        end
+    elseif Screen_Mode == "win" then
+        if key == "space" then
+            Screen_Mode = "menu"
         end
     end
 

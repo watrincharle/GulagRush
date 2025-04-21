@@ -4,6 +4,7 @@ function game:update(dt)
     mX, mY = love.mouse.getPosition()
         map0.update()
         hero:update(dt)
+        level0:update()
         if #ennemies > 0 then
             for _, e in ipairs(ennemies) do
                 e:update(dt)  
@@ -11,6 +12,7 @@ function game:update(dt)
             for i = #ennemies, 1, -1 do
                 if ennemies[i].isFree == true then
                     table.remove(ennemies, i)
+                    numberOfKilled = numberOfKilled + 1
                 end
             end
         end
