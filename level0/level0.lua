@@ -1,6 +1,8 @@
 level0 = {}
 
 function level0.load()
+    numberOfEnnemies = 30
+    numberOfKilled = 0
 
 end
 
@@ -20,6 +22,9 @@ function level0:update()
             end
         end
     end
+    if numberOfKilled == numberOfEnnemies then
+        Screen_Mode = "win"
+    end
 
 
 end
@@ -29,6 +34,12 @@ function level0.draw()
 end
 
 function level0.init1()
+    numberOfKilled = 0
+    map0Data = map01
+    bullets = {}
+    bulletDrop = {}
+    healthDrop = {}
+    canChangeFloor = true
     table.insert(ennemies, enemyModule.load(7, 9))
     table.insert(ennemies, enemyModule.load(12, 8))
     table.insert(ennemies, enemyModule.load(16, 8))

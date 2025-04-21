@@ -12,6 +12,7 @@ function game:update(dt)
             for i = #ennemies, 1, -1 do
                 if ennemies[i].isFree == true then
                     table.remove(ennemies, i)
+                    numberOfKilled = numberOfKilled + 1
                 end
             end
         end
