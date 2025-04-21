@@ -1,9 +1,9 @@
 enemyModule = {}
 
-function enemyModule.load()
+function enemyModule.load(x, y)
     local e = {}
-    e.x = 200
-    e.y = 200
+    e.x = x * map0.tileSize + map0.posX
+    e.y = y * map0.tileSize + map0.posY
     e.sprite = love.graphics.newImage("sprites/ennemy.png")
     e.heart = love.graphics.newImage("sprites/heart.png")
     e.speed = 80
@@ -70,7 +70,7 @@ function enemyModule.load()
         e.y = e.y + speedPatrol * dt * math.sin(e.rotation)
         e.timerSearching = e.timerSearching - dt
         if checkCircleCollision(e, hero, e.STATE) then
-            e.STATE = "chaseTarget"
+            e.STATE = "shoot" -- ou chaseTarget
         elseif e.timerSearching <= 0 then
             e.STATE = "idle"
             e.timerSearching = math.random(0.5, 2)
@@ -81,7 +81,7 @@ function enemyModule.load()
         local delta = love.timer.getDelta()
         e.timerSearching = e.timerSearching - delta
         if checkCircleCollision(e, hero, e.STATE) then
-            e.STATE = "chaseTarget"
+            e.STATE = "chaseTarget" -- ou chaseTarget
         elseif e.timerSearching <= 0 then
             e.STATE = "isSearching"
             e.rotation = math.random(0, 2 * math.pi)
@@ -94,28 +94,28 @@ function enemyModule.load()
             dX = 0
             dY = 0
         end
-        if love.keyboard.isDown("z") and m0ap.posY + map0.tileSize + hero.sizeY <= hero.y then
+        if love.keyboard.isDown("z") and map0.posY + map0.tileSize + hero.sizeY <= hero.y then
             if not isNextSideWall(hero, 0, -1) then
                 dY = dY + 1
             else
                 dY = 0
             end
         end
-        if love.keyboard.isDown("s") and hero.y + 32 <= (m0ap.posY + m0ap.height + m0ap.tileSize) then
+        if love.keyboard.isDown("s") and hero.y + 32 <= (map0.posY + map0.height + map0.tileSize) then
             if not isNextSideWall(hero, 0, 1) then
                 dY = dY - 1
             else
                 dY = 0
             end
         end
-        if love.keyboard.isDown("q") and m0ap.posX + m0ap.tileSize + hero.sizeX <= hero.x then
+        if love.keyboard.isDown("q") and map0.posX + map0.tileSize + hero.sizeX <= hero.x then
             if not isNextSideWall(hero, -1, 0) then
                 dX = dX + 1
             else
                 dX = 0
             end
         end
-        if love.keyboard.isDown("d") and hero.x + 32 <= (m0ap.posX + m0ap.width + m0ap.tileSize) then
+        if love.keyboard.isDown("d") and hero.x + 32 <= (map0.posX + map0.width + map0.tileSize) then
             if not isNextSideWall(hero, 1, 0) then
                 dX = dX - 1
             else
@@ -169,11 +169,11 @@ function enemyModule.load()
             table.insert(bullets, newShoot)
             e.timerLoading = 1
         end
-        if not checkCircleCollision(e, hero, "chaseTarget") then
-            e.STATE = "chaseTarget"
-        elseif checkCircleCollision(e, hero, "getBack") then
-            e.STATE = "getBack"
-        end
+    --    if not checkCircleCollision(e, hero, "chaseTarget") then
+    --        e.STATE = "chaseTarget"
+   --     elseif checkCircleCollision(e, hero, "getBack") then
+   --         e.STATE = "getBack"
+     --   end
     end
     
     function e:draw()

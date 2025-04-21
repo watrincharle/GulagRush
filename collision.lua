@@ -18,7 +18,7 @@ function checkCircleCollision(a, b, c)
         local dx = a.x - b.x
         local dy = a.y - b.y
         local distance = math.sqrt(dx * dx + dy * dy)
-        return distance < (a.radius * .5 + b.radius)
+        return distance < (a.radius * .75 + b.radius)
     end
 end
 
@@ -41,8 +41,8 @@ end
 
 
 function isNextSideWall(pObject, vx, vy)
-    local sideX = pObject.x + vx * (pObject.width *.5 + pObject.speed)
-    local sideY =  pObject.y + vy * (pObject.height * .5 + pObject.speed)
+    local sideX = pObject.x + vx * (pObject.width *.5 + hero.speed)
+    local sideY =  pObject.y + vy * (pObject.height * .5 + hero.speed)
     local corner1 = { -- vx = 1 | vy = 0
         x = sideX + vy * pObject.width * .5, -- x = sideX
         y = sideY + vx * pObject.height * .5 -- y = sideY + hitbox/2
