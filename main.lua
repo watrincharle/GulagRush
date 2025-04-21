@@ -11,6 +11,7 @@ local game = require("scenes/game")
 local init = require("init")
 local droppedBullets = require("droppedBullets")
 local droppedHealth = require("droppedHealth")
+local level0 = require("level0/level0")
 
 ennemies = {}
 bullets = {}
