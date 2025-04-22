@@ -2,7 +2,7 @@ droppedBullets = {}
 
 function droppedBullets.load(pEx, pEy)
     local db = {}
-    db.sprite = love.graphics.newImage("sprites/droppedBullets.png")
+    db.sprite = love.graphics.newImage("assets/droppedBullets.png")
     db.x = pEx + 10
     db.y = pEy - 10
     db.hitbox = 16

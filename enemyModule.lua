@@ -4,8 +4,8 @@ function enemyModule.load(x, y)
     local e = {}
     e.x = x * map0.tileSize + map0.posX + 64
     e.y = y * map0.tileSize + map0.posY + 64
-    e.sprite = love.graphics.newImage("sprites/ennemy.png")
-    e.heart = love.graphics.newImage("sprites/heart.png")
+    e.sprite = love.graphics.newImage("assets/sprites/ennemy.png")
+    e.heart = love.graphics.newImage("assets/heart.png")
     e.speed = 80
     e.life = 3
     e.rotation = math.random(0, 2 * math.pi)

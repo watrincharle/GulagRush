@@ -1,7 +1,7 @@
 shoot = {}
 
 function shoot.load(pShooter, pIndex)
-    local sprite = love.graphics.newImage("sprites/bullet.png")
+    local sprite = love.graphics.newImage("assets/bullet.png")
     local s = {}
         s.index = pIndex
         s.x = pShooter.x or 100

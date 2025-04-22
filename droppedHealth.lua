@@ -2,7 +2,7 @@ droppedHealth = {}
 
 function droppedHealth.load(pEx, pEy)
     local dh = {}
-    dh.sprite = love.graphics.newImage("sprites/droppedhealth.png")
+    dh.sprite = love.graphics.newImage("assets/droppedhealth.png")
     dh.x = pEx - 10
     dh.y = pEy + 10
     dh.hitbox = 16

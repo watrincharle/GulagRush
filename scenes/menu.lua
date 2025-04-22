@@ -1,10 +1,10 @@
 menu = {}
 
 function menu.load()
-    mainScreen = love.graphics.newImage("sprites/MainScreen.png")
-    playButton = love.graphics.newImage("sprites/playButton.png")
-    resumeButton = love.graphics.newImage("sprites/resumeButton.png")
-    exitButton = love.graphics.newImage("sprites/exitButton.png")
+    mainScreen = love.graphics.newImage("assets/MainScreen.png")
+    playButton = love.graphics.newImage("assets/playButton.png")
+    resumeButton = love.graphics.newImage("assets/resumeButton.png")
+    exitButton = love.graphics.newImage("assets/exitButton.png")
 end
 
 function menu:update(dt)

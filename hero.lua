@@ -62,7 +62,7 @@ hero.moove = function()
 end
 
 function hero.load()
-    hero.sprite = love.graphics.newImage("sprites/hero.png")
+    hero.sprite = love.graphics.newImage("assets/sprites/hero.png")
     hero.x = love.graphics.getWidth()/2 - 16
     hero.y = love.graphics.getHeight()/2 - 16
     hero.sizeX = 32
@@ -80,7 +80,7 @@ function hero.load()
     hero.dash = false
     hero.isMooving = false
     hero.dashTimer = 2
-    hero.dashSprite = love.graphics.newImage("sprites/dash.png")
+    hero.dashSprite = love.graphics.newImage("assets/dash.png")
     hero.dashSpriteWidth = hero.dashSprite:getWidth()
     hero.dashSpriteHeight = hero.dashSprite:getHeight()
 end
