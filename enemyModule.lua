@@ -31,7 +31,7 @@ function enemyModule.load(x, y)
         elseif e.STATE == "shoot" then
             e:shoot(dt)
         end
-        e:stayAtTheRightPosition()
+        e:stayAtTheRightPosition(dt)
         if e.life <= 0 then
             e.isFree = true
         end
@@ -39,24 +39,24 @@ function enemyModule.load(x, y)
             table.insert(bulletDrop, droppedBullets.load(e.x, e.y))
             table.insert(healthDrop, droppedHealth.load(e.x, e.y))
         end 
-        e:isOnTheWall()
+        e:isOnTheWall(dt)
     end
 
-    function e:isOnTheWall()
-        if isNextSideWall(e, 1, 0) then
-            e.x = e.x - hero.speed
+    function e:isOnTheWall(dt)
+        if isNextSideWall(e, 1, 0, dt) then
+            e.x = e.x - hero.speed * dt
             e.rotation = e.rotation + math.pi
             e.STATE = "isSearching"
-        elseif isNextSideWall(e, -1, 0) then
-            e.x = e.x + hero.speed
+        elseif isNextSideWall(e, -1, 0, dt) then
+            e.x = e.x + hero.speed * dt
             e.rotation = e.rotation + math.pi
             e.STATE = "isSearching"
-        elseif isNextSideWall(e, 0, 1) then
-            e.y = e.y - hero.speed
+        elseif isNextSideWall(e, 0, 1, dt) then
+            e.y = e.y - hero.speed * dt
             e.rotation = e.rotation + math.pi
             e.STATE = "isSearching"
-        elseif isNextSideWall(e, 0, -1) then
-            e.y = e.y + hero.speed
+        elseif isNextSideWall(e, 0, -1, dt) then
+            e.y = e.y + hero.speed * dt
             e.rotation = e.rotation + math.pi
             e.STATE = "isSearching"
         end
@@ -89,34 +89,34 @@ function enemyModule.load(x, y)
         end
     end
 
-    function e:stayAtTheRightPosition()
+    function e:stayAtTheRightPosition(dt)
         if not love.keyboard.isDown("z") or not love.keyboard.isDown("q") or not love.keyboard.isDown("s") or not love.keyboard.isDown("d") then
             dX = 0
             dY = 0
         end
         if love.keyboard.isDown("z") and map0.posY + map0.tileSize + hero.sizeY <= hero.y then
-            if not isNextSideWall(hero, 0, -1) then
+            if not isNextSideWall(hero, 0, -1, dt) then
                 dY = dY + 1
             else
                 dY = 0
             end
         end
         if love.keyboard.isDown("s") and hero.y + 32 <= (map0.posY + map0.height + map0.tileSize) then
-            if not isNextSideWall(hero, 0, 1) then
+            if not isNextSideWall(hero, 0, 1, dt) then
                 dY = dY - 1
             else
                 dY = 0
             end
         end
         if love.keyboard.isDown("q") and map0.posX + map0.tileSize + hero.sizeX <= hero.x then
-            if not isNextSideWall(hero, -1, 0) then
+            if not isNextSideWall(hero, -1, 0, dt) then
                 dX = dX + 1
             else
                 dX = 0
             end
         end
         if love.keyboard.isDown("d") and hero.x + 32 <= (map0.posX + map0.width + map0.tileSize) then
-            if not isNextSideWall(hero, 1, 0) then
+            if not isNextSideWall(hero, 1, 0, dt) then
                 dX = dX - 1
             else
                 dX = 0
@@ -127,14 +127,14 @@ function enemyModule.load(x, y)
             dX = dX / magnitude
             dY = dY / magnitude
         end
-        newPosX = e.x + dX * hero.speed
-        newPosY = e.y + dY * hero.speed
+        newPosX = e.x + dX * hero.speed * dt
+        newPosY = e.y + dY * hero.speed * dt
             e.x = newPosX
             e.y = newPosY
     end
 
     function e:chaseTarget(dt)
-        e:isOnTheWall()
+        e:isOnTheWall(dt)
         e.rotation = math.atan2(hero.y - e.y, hero.x - e.x)
         e.x = e.x + e.speed * dt * math.cos(e.rotation)
         e.y = e.y + e.speed * dt * math.sin(e.rotation)
@@ -150,7 +150,7 @@ function enemyModule.load(x, y)
 
 
     function e:getBack(dt)
-        e:isOnTheWall()
+        e:isOnTheWall(dt)
         local angleAway = math.atan2(e.y - hero.y, e.x - hero.x)
         e.x = e.x + e.speed * dt * math.cos(angleAway)
         e.y = e.y + e.speed * dt * math.sin(angleAway)
@@ -161,7 +161,7 @@ function enemyModule.load(x, y)
 
 
     function e:shoot(dt)
-        e:isOnTheWall()
+        e:isOnTheWall(dt)
         e.rotation = math.atan2(hero.y - e.y, hero.x - e.x)
         e.timerLoading = e.timerLoading - dt
         if e.timerLoading <= 0 then
