@@ -40,9 +40,9 @@ function getTileIndexes(x, y)
 end
 
 
-function isNextSideWall(pObject, vx, vy)
-    local sideX = pObject.x + vx * (pObject.width *.5 + hero.speed)
-    local sideY =  pObject.y + vy * (pObject.height * .5 + hero.speed)
+function isNextSideWall(pObject, vx, vy, dt)
+    local sideX = pObject.x + vx * (pObject.width *.5 + hero.speed * dt)
+    local sideY =  pObject.y + vy * (pObject.height * .5 + hero.speed * dt)
     local corner1 = { -- vx = 1 | vy = 0
         x = sideX + vy * pObject.width * .5, -- x = sideX
         y = sideY + vx * pObject.height * .5 -- y = sideY + hitbox/2

@@ -16,7 +16,7 @@ function shoot.load(pShooter, pIndex)
     
 
     function s:update(dt)
-        if isNextSideWall(s, 0, 0) then
+        if isNextSideWall(s, 0, 0, dt) then
             s.isFree = true
         end
         s.x = s.x + s.speed * dt * math.cos(s.rotation)
@@ -43,33 +43,57 @@ function shoot.load(pShooter, pIndex)
         if bulletOutOfRange(s) then
             s.isFree = true
         end
-        s:stayAtTheRightPosition()
+        s:stayAtTheRightPosition(dt)
     end
 
-    function s:stayAtTheRightPosition()
+    function s:stayAtTheRightPosition(dt)
         if not love.keyboard.isDown("z") or not love.keyboard.isDown("q") or not love.keyboard.isDown("s") or not love.keyboard.isDown("d") then
-            local dX = 0
-            local dY = 0
+            dX = 0
+            dY = 0
+            hero.isMooving = false
         end
-        if love.keyboard.isDown("z") and map0.posY <= hero.y then
-            dY = dY + 1
+        if love.keyboard.isDown("z") and map0.posY + map0.tileSize + hero.sizeY <= hero.y then
+            hero.isMooving = true
+            if not isNextSideWall(hero, 0, -1, dt) then
+                dY = dY + 1
+            else
+                dY = 0
+            end
         end
-        if love.keyboard.isDown("s") and hero.y + 32 <= (map0.posY + map0.height) then
-            dY = dY - 1
+        if love.keyboard.isDown("s") and hero.y + 32 <= (map0.posY + map0.height + map0.tileSize) then
+            hero.isMooving = true
+            if not isNextSideWall(hero, 0, 1, dt) then
+                dY = dY - 1
+            else
+                dY = 0
+            end
         end
-        if love.keyboard.isDown("q") and map0.posX <= hero.x then
-            dX = dX + 1
+        if love.keyboard.isDown("q") and map0.posX + map0.tileSize + hero.sizeX <= hero.x then
+            hero.isMooving = true
+            if not isNextSideWall(hero, -1, 0, dt) then
+                dX = dX + 1
+            else
+                dX = 0
+            end
         end
-        if love.keyboard.isDown("d") and hero.x + 32 <= (map0.posX + map0.width) then
-            dX = dX - 1
+        if love.keyboard.isDown("d") and hero.x + 32 <= (map0.posX + map0.width + map0.tileSize) then
+            hero.isMooving = true
+            if not isNextSideWall(hero, 1, 0, dt) then
+                dX = dX - 1
+            else
+                dX = 0
+            end
         end
         local magnitude = math.sqrt(dX * dX + dY * dY)
         if magnitude > 0 then
             dX = dX / magnitude
             dY = dY / magnitude
         end
-        s.x = s.x + dX * hero.speed
-        s.y = s.y + dY * hero.speed
+        newPosX = s.x + dX * hero.speed * dt
+        newPosY = s.y + dY * hero.speed * dt
+    
+            s.x = newPosX
+            s.y = newPosY
     end
 
     function s:draw()

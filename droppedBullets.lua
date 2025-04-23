@@ -12,7 +12,7 @@ function droppedBullets.load(pEx, pEy)
     db.height = db.sprite:getHeight()
 
     function db:update(dt)
-        db:stayAtTheRightPosition()
+        db:stayAtTheRightPosition(dt)
         if checkCollision(db, hero) then
             if a.ammoInPocket <= 149 then
                 a.ammoInPocket = a.ammoInPocket + db.value
@@ -24,51 +24,51 @@ function droppedBullets.load(pEx, pEy)
                 a.ammoInPocket = 150
             end
         end
-        db:isOnTheWall()
+        db:isOnTheWall(dt)
     end 
 
-    function db:isOnTheWall()
-        if isNextSideWall(db, 1, 0) then
-            db.x = db.x - hero.speed
-        elseif isNextSideWall(db, -1, 0) then
-            db.x = db.x + hero.speed
-        elseif isNextSideWall(db, 0, 1) then
-            db.y = db.y - hero.speed
-        elseif isNextSideWall(db, 0, -1) then
-            db.y = db.y + hero.speed
+    function db:isOnTheWall(dt)
+        if isNextSideWall(db, 1, 0, dt) then
+            db.x = db.x - hero.speed * dt
+        elseif isNextSideWall(db, -1, 0, dt) then
+            db.x = db.x + hero.speed * dt
+        elseif isNextSideWall(db, 0, 1, dt) then
+            db.y = db.y - hero.speed * dt
+        elseif isNextSideWall(db, 0, -1, dt) then
+            db.y = db.y + hero.speed * dt
         end
     end
 
 
 
-    function db:stayAtTheRightPosition()
+    function db:stayAtTheRightPosition(dt)
         if not love.keyboard.isDown("z") or not love.keyboard.isDown("q") or not love.keyboard.isDown("s") or not love.keyboard.isDown("d") then
             dX = 0
             dY = 0
         end
         if love.keyboard.isDown("z") and map0.posY + map0.tileSize + hero.sizeY <= hero.y then
-            if not isNextSideWall(hero, 0, -1) then
+            if not isNextSideWall(hero, 0, -1, dt) then
                 dY = dY + 1
             else
                 dY = 0
             end
         end
         if love.keyboard.isDown("s") and hero.y + 32 <= (map0.posY + map0.height + map0.tileSize) then
-            if not isNextSideWall(hero, 0, 1) then
+            if not isNextSideWall(hero, 0, 1, dt) then
                 dY = dY - 1
             else
                 dY = 0
             end
         end
         if love.keyboard.isDown("q") and map0.posX + map0.tileSize + hero.sizeX <= hero.x then
-            if not isNextSideWall(hero, -1, 0) then
+            if not isNextSideWall(hero, -1, 0, dt) then
                 dX = dX + 1
             else
                 dX = 0
             end
         end
         if love.keyboard.isDown("d") and hero.x + 32 <= (map0.posX + map0.width + map0.tileSize) then
-            if not isNextSideWall(hero, 1, 0) then
+            if not isNextSideWall(hero, 1, 0, dt) then
                 dX = dX - 1
             else
                 dX = 0
@@ -79,8 +79,8 @@ function droppedBullets.load(pEx, pEy)
             dX = dX / magnitude
             dY = dY / magnitude
         end
-        newPosX = db.x + dX * hero.speed
-        newPosY = db.y + dY * hero.speed
+        newPosX = db.x + dX * hero.speed * dt
+        newPosY = db.y + dY * hero.speed * dt
 
             db.x = newPosX
             db.y = newPosY

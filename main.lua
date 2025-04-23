@@ -107,7 +107,7 @@ function love.keypressed(key)
             end
         end
         if key == "lshift" and not hero.dash and hero.isMooving then
-            hero.speed = 20
+            hero.speed = 1000
             hero.dash = true
         end
 

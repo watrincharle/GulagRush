@@ -6,7 +6,7 @@ dY = 0
 newPosX = 0
 newPosY = 0
 
-hero.moove = function()
+hero.moove = function(dt)
 
 
     if not love.keyboard.isDown("z") or not love.keyboard.isDown("q") or not love.keyboard.isDown("s") or not love.keyboard.isDown("d") then
@@ -16,7 +16,7 @@ hero.moove = function()
     end
     if love.keyboard.isDown("z") and map0.posY + map0.tileSize + hero.sizeY <= hero.y then
         hero.isMooving = true
-        if not isNextSideWall(hero, 0, -1) then
+        if not isNextSideWall(hero, 0, -1, dt) then
             dY = dY + 1
         else
             dY = 0
@@ -24,7 +24,7 @@ hero.moove = function()
     end
     if love.keyboard.isDown("s") and hero.y + 32 <= (map0.posY + map0.height + map0.tileSize) then
         hero.isMooving = true
-        if not isNextSideWall(hero, 0, 1) then
+        if not isNextSideWall(hero, 0, 1, dt) then
             dY = dY - 1
         else
             dY = 0
@@ -32,7 +32,7 @@ hero.moove = function()
     end
     if love.keyboard.isDown("q") and map0.posX + map0.tileSize + hero.sizeX <= hero.x then
         hero.isMooving = true
-        if not isNextSideWall(hero, -1, 0) then
+        if not isNextSideWall(hero, -1, 0, dt) then
             dX = dX + 1
         else
             dX = 0
@@ -40,7 +40,7 @@ hero.moove = function()
     end
     if love.keyboard.isDown("d") and hero.x + 32 <= (map0.posX + map0.width + map0.tileSize) then
         hero.isMooving = true
-        if not isNextSideWall(hero, 1, 0) then
+        if not isNextSideWall(hero, 1, 0, dt) then
             dX = dX - 1
         else
             dX = 0
@@ -51,8 +51,8 @@ hero.moove = function()
         dX = dX / magnitude
         dY = dY / magnitude
     end
-    newPosX = map0.posX + dX * hero.speed
-    newPosY = map0.posY + dY * hero.speed
+    newPosX = map0.posX + dX * hero.speed * dt
+    newPosY = map0.posY + dY * hero.speed * dt
 
         map0.posX = newPosX
         map0.posY = newPosY
@@ -70,7 +70,7 @@ function hero.load()
     hero.width = hero.sprite:getWidth()
     hero.height = hero.sprite:getHeight()
     hero.rotation = 0
-    hero.speed = 4
+    hero.speed = 300
     hero.radius = 32
     hero.life = 5
     hero.hitbox = hero.radius
@@ -89,7 +89,7 @@ end
 function hero:update(dt)
     hero:doTheDash(dt)
     hero.rotation = math.atan2(mY - hero.y, mX - hero.x)
-    hero.moove()
+    hero.moove(dt)
     if hero.isInvincible then
         hero:invisibilityFrame(dt)
     end
@@ -99,8 +99,8 @@ function hero:update(dt)
 end
 
 function hero:doTheDash(dt)
-    if hero.speed > 4 then
-        hero.speed = hero.speed - 0.8
+    if hero.speed > 300 then
+        hero.speed = hero.speed - 30
     end
     if hero.dash then
         hero.dashTimer = hero.dashTimer - dt
