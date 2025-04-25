@@ -6,7 +6,7 @@ function level0.load()
 
 end
 
-function level0:update()
+function level0.update()
     stairPositionX = 13 * map0.tileSize + map0.posX
     stairPositionY = 11 * map0.tileSize + map0.posY
     canChangeFloor = true

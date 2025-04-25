@@ -15,7 +15,7 @@ function shoot.load(pShooter, pIndex)
         s.isFree = false
     
 
-    function s:update(dt)
+    function s.update(dt)
         if isNextSideWall(s, 0, 0, dt) then
             s.isFree = true
         end
@@ -43,10 +43,10 @@ function shoot.load(pShooter, pIndex)
         if bulletOutOfRange(s) then
             s.isFree = true
         end
-        s:stayAtTheRightPosition(dt)
+        s.stayAtTheRightPosition(dt)
     end
 
-    function s:stayAtTheRightPosition(dt)
+    function s.stayAtTheRightPosition(dt)
         if not love.keyboard.isDown("z") or not love.keyboard.isDown("q") or not love.keyboard.isDown("s") or not love.keyboard.isDown("d") then
             dX = 0
             dY = 0
@@ -96,7 +96,7 @@ function shoot.load(pShooter, pIndex)
             s.y = newPosY
     end
 
-    function s:draw()
+    function s.draw()
         love.graphics.draw(s.sprite, s.x, s.y, s.rotation, 1, 1, s.width / 2, s.height / 2)
     end
 
