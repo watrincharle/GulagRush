@@ -6,12 +6,12 @@ function gameOver.draw()
     hero.draw()
     if #ennemies > 0 then
         for _, e in ipairs(ennemies) do
-            e:draw()
+            e.draw()
         end
     end
     if #bullets > 0 then
         for _, s in ipairs(bullets) do
-            s:draw() 
+            s.draw() 
         end
     end
     ammoManager.draw()

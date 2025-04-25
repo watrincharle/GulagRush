@@ -10,18 +10,18 @@ function droppedHealth.load(pEx, pEy)
     dh.width = dh.sprite:getWidth()
     dh.height = dh.sprite:getHeight()
 
-    function dh:update(dt)
-        dh:stayAtTheRightPosition(dt)
+    function dh.update(dt)
+        dh.stayAtTheRightPosition(dt)
         if checkCollision(dh, hero) then
             if hero.life < 5 then
                 hero.life = hero.life + 1
                 dh.isFree = true
             end
         end
-        dh:isOnTheWall(dt)
+        dh.isOnTheWall(dt)
     end 
 
-    function dh:isOnTheWall(dt)
+    function dh.isOnTheWall(dt)
         if isNextSideWall(dh, 1, 0, dt) then
             dh.x = dh.x - hero.speed * dt
         elseif isNextSideWall(dh, -1, 0, dt) then
@@ -34,7 +34,7 @@ function droppedHealth.load(pEx, pEy)
     end
 
 
-    function dh:stayAtTheRightPosition(dt)
+    function dh.stayAtTheRightPosition(dt)
         if not love.keyboard.isDown("z") or not love.keyboard.isDown("q") or not love.keyboard.isDown("s") or not love.keyboard.isDown("d") then
             dX = 0
             dY = 0
@@ -81,7 +81,7 @@ function droppedHealth.load(pEx, pEy)
     end
 
 
-    function dh:draw()
+    function dh.draw()
         love.graphics.draw(dh.sprite, dh.x, dh.y, 0, 1, 1, 8, 8)
     end
 

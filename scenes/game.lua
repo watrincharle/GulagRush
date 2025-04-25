@@ -1,13 +1,13 @@
 game = {}
 
-function game:update(dt)
+function game.update(dt)
     mX, mY = love.mouse.getPosition()
         map0.update()
-        hero:update(dt)
-        level0:update()
+        hero.update(dt)
+        level0.update()
         if #ennemies > 0 then
             for _, e in ipairs(ennemies) do
-                e:update(dt)  
+                e.update(dt)  
             end
             for i = #ennemies, 1, -1 do
                 if ennemies[i].isFree == true then
@@ -18,7 +18,7 @@ function game:update(dt)
         end
         if #bullets > 0 then
             for _, s in ipairs(bullets) do
-                s:update(dt) 
+                s.update(dt) 
             end
             for i = #bullets, 1, -1 do
                 if bullets[i].isFree == true then
@@ -28,7 +28,7 @@ function game:update(dt)
         end
         if #bulletDrop > 0 then
             for _, db in ipairs(bulletDrop) do
-                db:update(dt)
+                db.update(dt)
             end
             for i = #bulletDrop, 1, -1 do
                 if bulletDrop[i].isFree == true then
@@ -38,7 +38,7 @@ function game:update(dt)
         end
         if #healthDrop > 0 then
             for _, dh in ipairs(healthDrop) do
-                dh:update(dt)
+                dh.update(dt)
             end
             for i = #healthDrop, 1, -1 do
                 if healthDrop[i].isFree == true then
@@ -54,24 +54,24 @@ function game.draw()
 
     if #bullets > 0 then
         for _, s in ipairs(bullets) do
-            s:draw() 
+            s.draw() 
         end
     end
     ammoManager.draw()
     if #bulletDrop > 0 then
         for _, db in ipairs(bulletDrop) do
-            db:draw()
+            db.draw()
         end
     end
     if #healthDrop > 0 then
         for _, dh in ipairs(healthDrop) do
-            dh:draw()
+            dh.draw()
         end
     end
     hero.draw()
     if #ennemies > 0 then
         for _, e in ipairs(ennemies) do
-            e:draw()
+            e.draw()
         end
     end
 end

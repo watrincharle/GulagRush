@@ -1,4 +1,4 @@
-local map0 = require("level0/map_0")
+
 
 hero = {}
 dX = 0
@@ -86,19 +86,19 @@ function hero.load()
 end
 
 
-function hero:update(dt)
-    hero:doTheDash(dt)
+function hero.update(dt)
+    hero.doTheDash(dt)
     hero.rotation = math.atan2(mY - hero.y, mX - hero.x)
     hero.moove(dt)
     if hero.isInvincible then
-        hero:invisibilityFrame(dt)
+        hero.invisibilityFrame(dt)
     end
     if hero.life <= 0 then
         hero.isAlive = false
     end
 end
 
-function hero:doTheDash(dt)
+function hero.doTheDash(dt)
     if hero.speed > 300 then
         hero.speed = hero.speed - 30
     end
@@ -112,7 +112,7 @@ function hero:doTheDash(dt)
 
 end
 
-function hero:invisibilityFrame(dt)
+function hero.invisibilityFrame(dt)
     hero.invinsibilityTimer = hero.invinsibilityTimer - dt
     if hero.invinsibilityTimer <= 0 then
         hero.isInvincible = false
@@ -121,7 +121,7 @@ function hero:invisibilityFrame(dt)
 end
 
 
-function hero:draw()
+function hero.draw()
     if hero.dash then
         love.graphics.setColor(0, 0, 0, .3)
         love.graphics.draw(hero.dashSprite, 100, screenHeight - 100, 0, 1, 1)

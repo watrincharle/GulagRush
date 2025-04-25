@@ -68,7 +68,7 @@ map0Data = map01
   -------------------------------------------------------------------------------------------------------------------
   -------------------------------------------------------------------------------------------------------------------
 
-function map0:load()
+function map0.load()
     map0.t1 = love.graphics.newImage("assets/wall.png")
     map0.t2 = love.graphics.newImage("assets/stair.png")
     map0.t3 = love.graphics.newImage("assets/shadowStair.png")
@@ -95,11 +95,11 @@ end
 
 
 
-function map0:update()
+function map0.update()
 
 end
 
-function map0:draw()
+function map0.draw()
     for y = 1, #map0Data do
         for x = 1, #map0Data[y] do
             if map0Data[y][x] == 1 then

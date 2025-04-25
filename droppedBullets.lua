@@ -11,8 +11,8 @@ function droppedBullets.load(pEx, pEy)
     db.width = db.sprite:getWidth()
     db.height = db.sprite:getHeight()
 
-    function db:update(dt)
-        db:stayAtTheRightPosition(dt)
+    function db.update(dt)
+        db.stayAtTheRightPosition(dt)
         if checkCollision(db, hero) then
             if a.ammoInPocket <= 149 then
                 a.ammoInPocket = a.ammoInPocket + db.value
@@ -24,10 +24,10 @@ function droppedBullets.load(pEx, pEy)
                 a.ammoInPocket = 150
             end
         end
-        db:isOnTheWall(dt)
+        db.isOnTheWall(dt)
     end 
 
-    function db:isOnTheWall(dt)
+    function db.isOnTheWall(dt)
         if isNextSideWall(db, 1, 0, dt) then
             db.x = db.x - hero.speed * dt
         elseif isNextSideWall(db, -1, 0, dt) then
@@ -41,7 +41,7 @@ function droppedBullets.load(pEx, pEy)
 
 
 
-    function db:stayAtTheRightPosition(dt)
+    function db.stayAtTheRightPosition(dt)
         if not love.keyboard.isDown("z") or not love.keyboard.isDown("q") or not love.keyboard.isDown("s") or not love.keyboard.isDown("d") then
             dX = 0
             dY = 0
@@ -88,7 +88,7 @@ function droppedBullets.load(pEx, pEy)
     end
 
 
-    function db:draw()
+    function db.draw()
         love.graphics.draw(db.sprite, db.x, db.y, 0, 1, 1, 8, 8)
     end
 

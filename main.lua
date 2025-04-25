@@ -2,7 +2,7 @@ local map0 = require("level0/map_0")
 local hero = require("hero")
 local enemyModule = require("enemyModule")
 local shoot = require("shoot")
-colision = require("collision")
+local colision = require("collision")
 local ammoManager = require("ammoManager")
 local menu = require("scenes/menu")
 local pause = require("scenes/pause")
@@ -45,7 +45,7 @@ function love.update(dt)
     if Screen_Mode == "menu" then
 
     elseif Screen_Mode == "game" then
-        game:update(dt)
+        game.update(dt)
     elseif Screen_Mode == "pause" then
 
     elseif Screen_Mode == "gameOver" then
@@ -94,7 +94,6 @@ function love.mousepressed(x, y, button)
         end
     end
 end
--- 320x 120
 function love.keypressed(key)
     if Screen_Mode == "menu" then
 
