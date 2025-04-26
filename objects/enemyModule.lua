@@ -18,6 +18,7 @@ function enemyModule.load(x, y)
     e.width = e.sprite:getWidth()
     e.height = e.sprite:getHeight()
     e.isFree = false
+    e.isDroppedHealth = math.random(0, 10)
 
     function e.update(dt)
         if e.STATE == "isSearching" then
@@ -37,7 +38,9 @@ function enemyModule.load(x, y)
         end
         if e.isFree then
             table.insert(bulletDrop, droppedBullets.load(e.x, e.y))
-            table.insert(healthDrop, droppedHealth.load(e.x, e.y))
+            if e.isDroppedHealth >= 7 then
+                table.insert(healthDrop, droppedHealth.load(e.x, e.y))
+            end
         end 
         e.isOnTheWall(dt)
     end

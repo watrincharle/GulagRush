@@ -1,18 +1,19 @@
 local map0 = require("level0/map_0")
-local hero = require("hero")
-local enemyModule = require("enemyModule")
-local shoot = require("shoot")
-local colision = require("collision")
-local ammoManager = require("ammoManager")
+local hero = require("player/hero")
+local enemyModule = require("objects/enemyModule")
+local shoot = require("utilities/shoot")
+local colision = require("utilities/collision")
+local ammoManager = require("player/ammoManager")
 local menu = require("scenes/menu")
 local pause = require("scenes/pause")
 local gameOver = require("scenes/gameOver")
 local game = require("scenes/game")
-local init = require("init")
-local droppedBullets = require("droppedBullets")
-local droppedHealth = require("droppedHealth")
+local init = require("utilities/init")
+local droppedBullets = require("objects/droppedBullets")
+local droppedHealth = require("objects/droppedHealth")
 local level0 = require("level0/level0")
 local win = require("scenes/win")
+local sceneManager = require("utilities/sceneManager")
 
 ennemies = {}
 bullets = {}
@@ -23,7 +24,7 @@ Screen_Mode = "menu"
 
 
 function love.load()
-    
+    math.randomseed(os.time())
     love.graphics.setDefaultFilter("nearest", "nearest")
     love.window.setMode(1600, 900)
     menu.load()
@@ -36,38 +37,15 @@ function love.load()
 end
 
 function love.update(dt)
-    
-
     if not hero.isAlive then
         Screen_Mode = "gameOver"
         hero.isAlive = true
     end 
-    if Screen_Mode == "menu" then
-
-    elseif Screen_Mode == "game" then
-        game.update(dt)
-    elseif Screen_Mode == "pause" then
-
-    elseif Screen_Mode == "gameOver" then
-
-    elseif Screen_Mode == "win" then
-
-    end
-    
+    sceneManager.update(dt)
 end
 
 function love.draw()
-    if Screen_Mode == "menu" then
-        menu.draw()
-    elseif Screen_Mode == "game" then
-        game.draw()
-    elseif Screen_Mode == "pause" then
-       pause.draw()
-    elseif Screen_Mode == "gameOver" then
-        gameOver.draw()
-    elseif Screen_Mode == "win" then
-        win.draw()
-    end
+    sceneManager.draw()
 end
 
 function love.mousepressed(x, y, button)
