@@ -1,7 +1,7 @@
 level0 = {}
 
 function level0.load()
-    numberOfEnnemies = 30
+    numberOfEnnemies = 28
     numberOfKilled = 0
 
 end
@@ -11,7 +11,7 @@ function level0.update()
     stairPositionY = 11 * map0.tileSize + map0.posY
     canChangeFloor = true
     if map0Data == map01 then
-        if hero.x >= stairPositionX and hero.x  <= stairPositionX + 192 and hero.y >= stairPositionY and hero.y  <= stairPositionY + 192 and canChangeFloor and #ennemies == 0 then
+        if hero.x >= stairPositionX and hero.x  <= stairPositionX + map0.tileSize * 4 and hero.y >= stairPositionY and hero.y  <= stairPositionY + map0.tileSize * 4 and canChangeFloor and #ennemies == 0 then
             if canChangeFloor then
                 map0Data = map02
                 level0.init2()
@@ -40,8 +40,6 @@ function level0.init1()
     bulletDrop = {}
     healthDrop = {}
     canChangeFloor = true
-    table.insert(ennemies, enemyModule.load(7, 9))
-    table.insert(ennemies, enemyModule.load(12, 8))
     table.insert(ennemies, enemyModule.load(16, 8))
     table.insert(ennemies, enemyModule.load(21, 7))
     table.insert(ennemies, enemyModule.load(30, 7))

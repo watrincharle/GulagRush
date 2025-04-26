@@ -104,7 +104,6 @@ function map0.draw()
         for x = 1, #map0Data[y] do
             if map0Data[y][x] == 1 then
                 love.graphics.draw(map0.t1, map0.posX + (x * map0.tileSize), map0.posY + (y * map0.tileSize), 0, 4, 4)
-                love.graphics.rectangle("line", map0.posX + (x * map0.tileSize), map0.posY + (y * map0.tileSize), map0.tileSize, map0.tileSize)
             elseif map0Data[y][x] == 2 then
                 love.graphics.draw(map0.t2, map0.posX + (x * map0.tileSize), map0.posY + (y * map0.tileSize), 0, 4, 4)
             elseif map0Data[y][x] == 3 then

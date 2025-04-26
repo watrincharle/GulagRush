@@ -136,7 +136,6 @@ function hero.draw()
     love.graphics.draw(hero.sprite, hero.x, hero.y, hero.rotation, 1 , 1 , hero.width/2, hero.height/2)
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.print(hero.life, 100, 100, 0, 3, 3)
-    love.graphics.circle("line", hero.x, hero.y, hero.hitbox)
 end
 
 function hero.init()
