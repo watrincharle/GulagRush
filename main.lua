@@ -14,6 +14,7 @@ local droppedHealth = require("objects/droppedHealth")
 local level0 = require("level0/level0")
 local win = require("scenes/win")
 local sceneManager = require("utilities/sceneManager")
+local audio = require("utilities/audio")
 
 ennemies = {}
 bullets = {}
@@ -34,9 +35,11 @@ function love.load()
     screenWidth = love.graphics.getWidth()
     screenHeight = love.graphics.getHeight()
     level0.load()
+    audio.load()
 end
 
 function love.update(dt)
+    audio.update()
     if not hero.isAlive then
         Screen_Mode = "gameOver"
         hero.isAlive = true
@@ -76,14 +79,8 @@ function love.keypressed(key)
     if Screen_Mode == "menu" then
 
     elseif Screen_Mode == "game" then
-        if key == "p" then
-            if map0Data == map01 then
-                map0Data = map02
-            elseif map0Data == map02 then
-                map0Data = map01
-            end
-        end
         if key == "lshift" and not hero.dash and hero.isMooving then
+            audio.dash:play()
             hero.speed = 1000
             hero.dash = true
         end

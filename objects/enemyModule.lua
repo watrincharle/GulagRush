@@ -168,6 +168,8 @@ function enemyModule.load(x, y)
         e.rotation = math.atan2(hero.y - e.y, hero.x - e.x)
         e.timerLoading = e.timerLoading - dt
         if e.timerLoading <= 0 then
+            audio.shoot:stop()
+            audio.shoot:play()
             local newShoot = shoot.load(e, "ennemy")
             table.insert(bullets, newShoot)
             e.timerLoading = 1

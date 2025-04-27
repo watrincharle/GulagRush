@@ -11,6 +11,8 @@ function game.update(dt)
             end
             for i = #ennemies, 1, -1 do
                 if ennemies[i].isFree == true then
+                    audio.dead:stop()
+                    audio.dead:play()
                     table.remove(ennemies, i)
                     numberOfKilled = numberOfKilled + 1
                 end

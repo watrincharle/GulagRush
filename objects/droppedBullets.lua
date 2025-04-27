@@ -16,6 +16,8 @@ function droppedBullets.load(pEx, pEy)
         if checkCollision(db, hero) then
             if a.ammoInPocket <= 149 then
                 a.ammoInPocket = a.ammoInPocket + db.value
+                audio.bonus:stop()
+                audio.bonus:play()
                 db.isFree = true
                 if a.ammoInPocket >= 150 then
                     a.ammoInPocket = 150

@@ -4,7 +4,7 @@ function ammoManager.load()
     a = {}
     a.ammoInPocket = 100
     a.ammoInMag = 30
-    a.reloadTimer = 2
+    a.reloadTimer = 1
     a.isReloading = false
     a.isEmpty = false
 end
@@ -22,25 +22,31 @@ function ammoManager.fire()
     elseif a.ammoInMag == 0 and a.ammoInPocket >= 1 then
         a.isReloading = true
     else
+        audio.shoot:stop()
+        audio.shoot:play()
         a.ammoInMag = a.ammoInMag - 1
         local newShoot = shoot.load(hero, "hero")
         table.insert(bullets, newShoot)
+        
     end
 end
 
 function ammoManager.reload(dt)
+    audio.reload:play()
     a.reloadTimer = a.reloadTimer - dt
     if a.reloadTimer <= 0 then
         a.isReloading = false
         local residus = 30 - a.ammoInMag
         if a.ammoInPocket >= residus then
+
             a.ammoInMag = a.ammoInMag + residus
             a.ammoInPocket = a.ammoInPocket - residus
         elseif a.ammoInPocket < residus then
+            
             a.ammoInMag = a.ammoInMag + a.ammoInPocket
             a.ammoInPocket = 0
         end
-        a.reloadTimer = 2
+        a.reloadTimer = 1
     end
 end
 
@@ -58,7 +64,7 @@ end
 function ammoManager.init()
     a.ammoInPocket = 100
     a.ammoInMag = 30
-    a.reloadTimer = 2
+    a.reloadTimer = 1
     a.isReloading = false
     a.isEmpty = false
 end

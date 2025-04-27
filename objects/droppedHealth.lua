@@ -14,6 +14,8 @@ function droppedHealth.load(pEx, pEy)
         dh.stayAtTheRightPosition(dt)
         if checkCollision(dh, hero) then
             if hero.life < 5 then
+                audio.bonus:stop()
+                audio.bonus:play()
                 hero.life = hero.life + 1
                 dh.isFree = true
             end
