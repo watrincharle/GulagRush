@@ -25,6 +25,8 @@ function shoot.load(pShooter, pIndex)
             if #ennemies > 0 then
                 for _, e in ipairs(ennemies) do
                     if checkCollision(e, s) then
+                        audio.hurt:stop()
+                        audio.hurt:play()
                         e.life = e.life - 1
                         s.isFree = true
                     end
@@ -34,6 +36,8 @@ function shoot.load(pShooter, pIndex)
             if checkCollision(hero, s) then
                 
                 if not hero.isInvincible then
+                    audio.hurt:stop()
+                    audio.hurt:play()
                     hero.life = hero.life - 1
                     hero.isInvincible = true
                 end
