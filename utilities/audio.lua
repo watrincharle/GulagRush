@@ -17,9 +17,9 @@ function audio.load()
 
     -----------------------------------
 
-    audio.shoot:setVolume(0.3)
-    audio.walk:setVolume(0.3)
-    audio.hurt:setVolume(0.7)
+    audio.shoot:setVolume(0.2)
+    audio.walk:setVolume(0.1)
+    audio.hurt:setVolume(0.6)
     audio.dash:setVolume(0.7)
     audio.reload:setVolume(0.8)
 end
@@ -34,8 +34,10 @@ function audio.update()
         end
     elseif Screen_Mode == "pause" then
         audio.musicLoop:pause()
+        audio.walk:stop()
     else
         audio.musicLoop:stop()
+        audio.walk:stop()
     end
 
 end
