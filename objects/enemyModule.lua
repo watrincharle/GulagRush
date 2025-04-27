@@ -137,16 +137,17 @@ function enemyModule.load(x, y)
     end
 
     function e.chaseTarget(dt)
-        e.isOnTheWall(dt)
-        e.rotation = math.atan2(hero.y - e.y, hero.x - e.x)
-        e.x = e.x + e.speed * dt * math.cos(e.rotation)
-        e.y = e.y + e.speed * dt * math.sin(e.rotation)
-        if  not checkCircleCollision(e, hero, "idle") then
-            e.STATE = "idle"
-        elseif checkCircleCollision(e, hero, e.STATE) then
-            e.STATE = "shoot"
-        elseif checkCircleCollision(e, hero, "getBack") then
-            e.STATE = "getBack"   
+        if not e.isOnTheWall(dt) then
+            e.rotation = math.atan2(hero.y - e.y, hero.x - e.x)
+            e.x = e.x + e.speed * dt * math.cos(e.rotation)
+            e.y = e.y + e.speed * dt * math.sin(e.rotation)
+            if  not checkCircleCollision(e, hero, "idle") then
+                e.STATE = "idle"
+            elseif checkCircleCollision(e, hero, e.STATE) then
+                e.STATE = "shoot"
+            elseif checkCircleCollision(e, hero, "getBack") then
+                e.STATE = "getBack"   
+            end
         end
     end
 
@@ -174,11 +175,9 @@ function enemyModule.load(x, y)
             table.insert(bullets, newShoot)
             e.timerLoading = 1
         end
-    --    if not checkCircleCollision(e, hero, "chaseTarget") then
-    --        e.STATE = "chaseTarget"
-   --     elseif checkCircleCollision(e, hero, "getBack") then
-   --         e.STATE = "getBack"
-     --   end
+        if not checkCircleCollision(e, hero, "shoot") then
+            e.STATE = "chaseTarget"
+        end
     end
     
     function e.draw()
